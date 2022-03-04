@@ -73,7 +73,8 @@ const updateNote = async (_, { id, content }, { models, user }) => {
   }
 
   try {
-    return await note.update(
+    return await models.Note.findOneAndUpdate(
+      { _id: id },
       {
         $set: {
           content,

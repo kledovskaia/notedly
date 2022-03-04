@@ -5,6 +5,9 @@ module.exports = gql`
   type Query {
     notes: [Note!]!
     note(id: ID!): Note!
+    me: User
+    users: [User]!
+    user(id: ID!): User
   }
   type Mutation {
     newNote(content: String!): Note!
