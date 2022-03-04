@@ -117,6 +117,12 @@ const toggleFavorite = async (_, { id }, { models, user }) => {
   const hasUser = note.favoritedBy.indexOf(user.id) !== -1;
 
   if (hasUser) {
+    await models.User.findByIdAndUpdate(user.id, {
+      $pull: {
+        favorites: mongoose.Types.ObjectId(id),
+      },
+    });
+
     return await models.Note.findByIdAndUpdate(
       id,
       {
@@ -132,6 +138,12 @@ const toggleFavorite = async (_, { id }, { models, user }) => {
       }
     );
   } else {
+    await models.User.findByIdAndUpdate(user.id, {
+      $push: {
+        favorites: mongoose.Types.ObjectId(id),
+      },
+    });
+
     return await models.Note.findByIdAndUpdate(
       id,
       {

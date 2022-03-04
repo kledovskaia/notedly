@@ -32,6 +32,6 @@ module.exports = gql`
     email: String!
     avatar: String
     notes: [Note!]!
-    favorites: [Note!]!
+    favorites: [ID!]!
   }
 `;
