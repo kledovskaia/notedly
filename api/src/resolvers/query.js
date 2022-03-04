@@ -1,6 +1,4 @@
-const { Note } = require('../schema');
-
 module.exports = {
-  notes: async () => await Note.find(),
-  note: async (_, { id }) => await Note.findById(id),
+  notes: async (_, __, { models }) => await models.Note.find(),
+  note: async (_, { id }, { models }) => await models.Note.findById(id),
 };

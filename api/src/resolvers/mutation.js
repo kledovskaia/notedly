@@ -1,8 +1,6 @@
-const { Note } = require('../schema');
-
 module.exports = {
-  newNote: async (_, { content }) =>
-    await Note.create({
+  newNote: async (_, { content }, { models }) =>
+    await models.Note.create({
       content,
       author: 'Maddison Matthews',
     }),
