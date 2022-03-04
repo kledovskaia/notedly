@@ -1,6 +1,7 @@
-require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+require('dotenv').config();
+
 const db = require('./db');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
