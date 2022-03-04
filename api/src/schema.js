@@ -22,7 +22,7 @@ module.exports = gql`
     content: String!
     author: User!
     favoriteCount: Int!
-    favoritedBy: [ID!]!
+    favoritedBy: [User!]!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -32,6 +32,6 @@ module.exports = gql`
     email: String!
     avatar: String
     notes: [Note!]!
-    favorites: [ID!]!
+    favorites: [Note!]!
   }
 `;
