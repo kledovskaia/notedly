@@ -27,14 +27,27 @@ const signUp = async (_, { username, email, password }, { models }) => {
       password: hashed,
     });
 
-    return await jwt.sign({ _id }, JWT_SECRET);
+    return jwt.sign({ _id }, JWT_SECRET);
   } catch (err) {
     console.error(err);
     throw new Error('Error Creating Account');
   }
 };
 
-const signIn = async (_, { username, email, password }, { models }) => {};
+const signIn = async (_, { username, email, password }, { models }) => {
+  if (username) username = normalize(username);
+  if (email) email = normalize(email);
+
+  const user = await models.User.findOne({
+    $or: [{ email }, { username }],
+  });
+  if (!user) throw new AuthenticationError('User not found');
+
+  const valid = await bcrypt.compare(password, user.password);
+  if (!valid) throw new AuthenticationError('Wrong password');
+
+  return jwt.sign({ _id: user._id }, JWT_SECRET);
+};
 
 const newNote = async (_, { content }, { models }) =>
   await models.Note.create({
