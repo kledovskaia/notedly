@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const {
@@ -49,11 +50,16 @@ const signIn = async (_, { username, email, password }, { models }) => {
   return jwt.sign({ _id: user._id }, JWT_SECRET);
 };
 
-const newNote = async (_, { content }, { models }) =>
-  await models.Note.create({
+const newNote = async (_, { content }, { models, user }) => {
+  if (!user) {
+    throw new AuthenticationError('You must be signed in to create a note');
+  }
+
+  return await models.Note.create({
     content,
-    author: 'Maddison Matthews',
+    author: mongoose.Types.ObjectId(user.id),
   });
+};
 
 const updateNote = async (_, { id, content }, { models }) => {
   return await models.Note.findOneAndUpdate(
