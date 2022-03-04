@@ -7,7 +7,7 @@ module.exports = gql`
     note(id: ID!): Note!
     me: User
     users: [User]!
-    user(id: ID!): User
+    user(id: ID, username: String): User
   }
   type Mutation {
     newNote(content: String!): Note!
