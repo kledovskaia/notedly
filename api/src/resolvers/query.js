@@ -1,5 +1,5 @@
 const note = async (_, { id }, { models }) => await models.Note.findById(id);
-const notes = async (_, __, { models }) => await models.Note.find();
+const notes = async (_, __, { models }) => await models.Note.find().limit(100);
 
 const me = async (_, __, { models, user }) => {
   return await models.User.findById(user.id);
@@ -9,7 +9,7 @@ const user = async (_, { id, username }, { models }) => {
     $or: [{ _id: id }, { username }],
   });
 };
-const users = async (_, __, { models }) => await models.User.find();
+const users = async (_, __, { models }) => await models.User.find().limit(100);
 
 const noteFeed = async (_, { cursor }, { models }) => {
   const limit = 10;
