@@ -11,10 +11,34 @@ const user = async (_, { id, username }, { models }) => {
 };
 const users = async (_, __, { models }) => await models.User.find();
 
+const noteFeed = async (_, { cursor }, { models }) => {
+  const limit = 10;
+  let hasNextPage = false;
+  let cursorQuery = !cursor ? {} : { _id: { $lt: cursor } };
+
+  let notes = await models.Note.find(cursorQuery)
+    .sort({ _id: -1 })
+    .limit(limit + 1);
+
+  if (notes.length > limit) {
+    hasNextPage = true;
+    notes = notes.slice(0, -1);
+  }
+
+  const newCursor = notes[notes.length - 1]._id;
+
+  return {
+    notes,
+    cursor: newCursor,
+    hasNextPage,
+  };
+};
+
 module.exports = {
   me,
   user,
   note,
   users,
   notes,
+  noteFeed,
 };
