@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -10,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { FC, ReactNode, useState } from 'react';
 import Header from './Header';
 import { Navigation } from './Navigation';
 
@@ -84,9 +84,13 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export const MiniDrawer = () => {
+type Props = {
+  main: ReactNode;
+};
+
+export const MiniDrawer: FC<Props> = ({ main }) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -128,7 +132,9 @@ export const MiniDrawer = () => {
         <Divider />
         <Navigation open={open} />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}></Box>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        {main}
+      </Box>
     </Box>
   );
 };

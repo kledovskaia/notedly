@@ -20,12 +20,12 @@ const noteFeed = async (_, { cursor }, { models }) => {
     .sort({ _id: -1 })
     .limit(limit + 1);
 
+  let newCursor = '';
   if (notes.length > limit) {
     hasNextPage = true;
     notes = notes.slice(0, -1);
+    newCursor = notes[notes.length - 1]._id;
   }
-
-  const newCursor = notes[notes.length - 1]._id;
 
   return {
     notes,
