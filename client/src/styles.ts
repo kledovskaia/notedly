@@ -9,6 +9,10 @@ export const NavLink = styled(NLink)`
 export const NoteFeedContainer = styled.section`
   padding: 4rem 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+
+  @media screen and (max-width: 40rem) {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
 `;

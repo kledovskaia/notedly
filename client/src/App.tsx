@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MiniDrawer } from './components/Drawer';
 import Header from './components/Header';
 import { Navigation } from './components/Navigation';
@@ -24,11 +24,18 @@ export const App = () => {
   return (
     <BrowserRouter>
       <MiniDrawer>
-        <NoteFeed
-          notes={data.noteFeed.notes}
-          hasMore={data.noteFeed.hasNextPage}
-          loadMore={loadMore}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <NoteFeed
+                notes={data.noteFeed.notes}
+                hasMore={data.noteFeed.hasNextPage}
+                loadMore={loadMore}
+              />
+            }
+          />
+        </Routes>
       </MiniDrawer>
     </BrowserRouter>
   );
