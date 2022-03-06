@@ -1,6 +1,5 @@
 import { CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { nanoid } from 'nanoid';
 import { createContext, ReactNode, useCallback, useState } from 'react';
 
 const themes = {

@@ -1,5 +1,10 @@
+import { BrowserRouter } from 'react-router-dom';
 import { MiniDrawer } from './components/Drawer';
 
 export const App = () => {
-  return <MiniDrawer />;
+  return (
+    <BrowserRouter>
+      <MiniDrawer />
+    </BrowserRouter>
+  );
 };
