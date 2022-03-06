@@ -1,3 +1,9 @@
+type TNoteFeed = {
+  hasNextPage: boolean;
+  cursor: TNote['id'];
+  notes: TNote[];
+};
+
 type TNote = {
   id: string;
   content: string;

@@ -84,11 +84,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-type Props = {
-  main: ReactNode;
-};
-
-export const MiniDrawer: FC<Props> = ({ main }) => {
+export const MiniDrawer: FC = ({ children }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -133,7 +129,7 @@ export const MiniDrawer: FC<Props> = ({ main }) => {
         <Navigation open={open} />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {main}
+        {children}
       </Box>
     </Box>
   );

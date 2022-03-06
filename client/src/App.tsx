@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client';
 import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MiniDrawer } from './components/Drawer';
@@ -6,9 +5,11 @@ import Header from './components/Header';
 import { Navigation } from './components/Navigation';
 import { NoteFeed } from './components/NoteFeed';
 import { GET_NOTES } from './graphql/query';
+import { useAppQuery } from './hooks/useAppQuery';
 
 export const App = () => {
-  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
+  const { data, loading, error, fetchMore } =
+    useAppQuery<{ noteFeed: TNoteFeed }>('GET_NOTES');
 
   useEffect(() => {
     console.log(data);
@@ -18,14 +19,17 @@ export const App = () => {
 
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h1>Error!</h1>;
+  if (!data) return <h1>No data found</h1>;
 
   return (
     <BrowserRouter>
-      <MiniDrawer
-        main={<NoteFeed notes={data.noteFeed.notes} />}
-        hasMore={data.noteFeed.hasNextPage}
-        loadMore={loadMore}
-      />
+      <MiniDrawer>
+        <NoteFeed
+          notes={data.noteFeed.notes}
+          hasMore={data.noteFeed.hasNextPage}
+          loadMore={loadMore}
+        />
+      </MiniDrawer>
     </BrowserRouter>
   );
 };
