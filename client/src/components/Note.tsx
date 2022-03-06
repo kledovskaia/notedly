@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FC } from 'react';
-import { Link } from '../styles';
+import { Link, Markdown } from '../styles';
 
 type Props = {
   note: TNote;
@@ -36,7 +36,7 @@ export const Note: FC<Props> = ({ note }) => {
       />
       <CardContent>
         <Typography variant="body1" color="text.primary">
-          {note.content}
+          <Markdown>{note.content}</Markdown>
         </Typography>
       </CardContent>
     </Card>

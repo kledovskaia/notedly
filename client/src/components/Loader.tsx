@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { LoadingContext } from '../context/Loading';
 
 export const Loader = () => {
-  const [isLoading] = useContext(LoadingContext);
+  const { isLoading } = useContext(LoadingContext);
 
   return (
     <Backdrop

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link as RLink } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 export const Link = styled(RLink)`
   color: inherit;
@@ -14,5 +15,11 @@ export const NoteFeedContainer = styled.section`
 
   @media screen and (max-width: 40rem) {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+`;
+
+export const Markdown = styled(ReactMarkdown)`
+  p {
+    margin: 0;
   }
 `;
