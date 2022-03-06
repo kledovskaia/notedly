@@ -8,7 +8,7 @@ import { FC } from 'react';
 import Home from '@mui/icons-material/Home';
 import MyNotes from '@mui/icons-material/Description';
 import Favorites from '@mui/icons-material/Bookmarks';
-import { NavLink } from '../styles';
+import { Link } from '../styles';
 import { useLocation } from 'react-router-dom';
 
 type Props = {
@@ -26,7 +26,7 @@ export const Navigation: FC<Props> = ({ open }) => {
   return (
     <List>
       {links.map(({ anchor, src, Icon }) => (
-        <NavLink to={src}>
+        <Link key={src} to={src}>
           <ListItemButton
             selected={src === '/' ? pathname === src : pathname.startsWith(src)}
             key={anchor}
@@ -47,7 +47,7 @@ export const Navigation: FC<Props> = ({ open }) => {
             </ListItemIcon>
             <ListItemText primary={anchor} sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
-        </NavLink>
+        </Link>
       ))}
     </List>
   );

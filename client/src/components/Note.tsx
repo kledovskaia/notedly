@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { FC } from 'react';
-import { red } from '@mui/material/colors';
+import { Link } from '../styles';
 
 type Props = {
   note: TNote;
@@ -18,14 +18,20 @@ export const Note: FC<Props> = ({ note }) => {
   return (
     <Card>
       <CardHeader
-        avatar={<Avatar src={note.author.avatar}></Avatar>}
+        avatar={
+          <Link to={`/users/${note.author.id}`}>
+            <Avatar src={note.author.avatar} />
+          </Link>
+        }
         action={
-          <IconButton aria-label="settings">
+          <IconButton>
             {/* <FavoriteIcon color="error" /> */}
             <FavoriteBorderIcon />
           </IconButton>
         }
-        title={note.author.username}
+        title={
+          <Link to={`/users/${note.author.id}`}>{note.author.username}</Link>
+        }
         subheader={timean.fromNow(new Date(note.createdAt))}
       />
       <CardContent>

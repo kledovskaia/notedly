@@ -1,17 +1,15 @@
 import { FC } from 'react';
+import { useAppQuery } from '../hooks/useAppQuery';
 import { NoteFeedContainer } from '../styles';
 import { Note } from './Note';
 
-type Props = {
-  notes: TNote[];
-  hasMore: boolean;
-  loadMore: () => void;
-};
+export const NoteFeed = () => {
+  const { data, loading, error, fetchMore } =
+    useAppQuery<{ noteFeed: TNoteFeed }>('GET_NOTES');
 
-export const NoteFeed: FC<Props> = ({ notes }) => {
   return (
     <NoteFeedContainer>
-      {notes.map((note) => (
+      {data?.noteFeed?.notes?.map((note) => (
         <Note key={note.id} note={note} />
       ))}
     </NoteFeedContainer>

@@ -2,6 +2,8 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
+import { Loader } from './components/Loader';
+import { LoadingContextProvider } from './context/Loading';
 import { ThemeContextProvider } from './context/Theme';
 
 const client = new ApolloClient({
@@ -14,7 +16,10 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <ThemeContextProvider>
-        <App />
+        <LoadingContextProvider>
+          <Loader />
+          <App />
+        </LoadingContextProvider>
       </ThemeContextProvider>
     </ApolloProvider>
   </React.StrictMode>,

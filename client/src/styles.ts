@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { NavLink as NLink } from 'react-router-dom';
+import { Link as RLink } from 'react-router-dom';
 
-export const NavLink = styled(NLink)`
+export const Link = styled(RLink)`
   color: inherit;
   text-decoration: none;
 `;
