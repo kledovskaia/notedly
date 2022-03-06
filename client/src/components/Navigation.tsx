@@ -1,4 +1,5 @@
 import {
+  Divider,
   List,
   ListItemButton,
   ListItemIcon,
@@ -8,6 +9,7 @@ import { FC } from 'react';
 import Home from '@mui/icons-material/Home';
 import MyNotes from '@mui/icons-material/Description';
 import Favorites from '@mui/icons-material/Bookmarks';
+import GitHub from '@mui/icons-material/GitHub';
 import { Link } from '../styles';
 import { useLocation } from 'react-router-dom';
 
@@ -29,7 +31,6 @@ export const Navigation: FC<Props> = ({ open }) => {
         <Link key={src} to={src}>
           <ListItemButton
             selected={src === '/' ? pathname === src : pathname.startsWith(src)}
-            key={anchor}
             sx={{
               minHeight: 48,
               justifyContent: open ? 'initial' : 'center',
@@ -49,6 +50,31 @@ export const Navigation: FC<Props> = ({ open }) => {
           </ListItemButton>
         </Link>
       ))}
+      <Divider />
+      <a
+        target="_blank"
+        href="https://github.com/kledovskaia/notedly"
+        rel="noreferrer"
+      >
+        <ListItemButton
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}
+        >
+          <ListItemIcon
+            sx={{
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
+            }}
+          >
+            <GitHub />
+          </ListItemIcon>
+          <ListItemText primary="Source code" sx={{ opacity: open ? 1 : 0 }} />
+        </ListItemButton>
+      </a>
     </List>
   );
 };

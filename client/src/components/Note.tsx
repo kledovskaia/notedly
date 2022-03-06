@@ -1,5 +1,6 @@
 import timean from 'timean';
 import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
@@ -24,10 +25,13 @@ export const Note: FC<Props> = ({ note }) => {
           </Link>
         }
         action={
-          <IconButton>
-            {/* <FavoriteIcon color="error" /> */}
-            <FavoriteBorderIcon />
-          </IconButton>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography color="text.secondary">{note.favoriteCount}</Typography>
+            <IconButton>
+              {/* <FavoriteIcon color="error" /> */}
+              <FavoriteBorderIcon />
+            </IconButton>
+          </Box>
         }
         title={
           <Link to={`/users/${note.author.id}`}>{note.author.username}</Link>

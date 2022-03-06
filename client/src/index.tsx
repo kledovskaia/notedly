@@ -5,6 +5,7 @@ import { App } from './App';
 import { Loader } from './components/Loader';
 import { LoadingContextProvider } from './context/Loading';
 import { ThemeContextProvider } from './context/Theme';
+import { GlobalStyles } from './styles';
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_API_URI,
@@ -17,8 +18,9 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <ThemeContextProvider>
         <LoadingContextProvider>
-          <Loader />
           <App />
+          <Loader />
+          <GlobalStyles />
         </LoadingContextProvider>
       </ThemeContextProvider>
     </ApolloProvider>

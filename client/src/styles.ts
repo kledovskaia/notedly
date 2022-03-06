@@ -1,6 +1,13 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Link as RLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+
+export const GlobalStyles = createGlobalStyle`
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+`;
 
 export const Link = styled(RLink)`
   color: inherit;
