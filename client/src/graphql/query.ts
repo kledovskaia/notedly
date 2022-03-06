@@ -55,3 +55,21 @@ export const GET_MY_NOTES = gql`
     }
   }
 `;
+export const GET_MY_FAVORITE_NOTES = gql`
+  query myFavoriteNotes {
+    me {
+      favorites {
+        id
+        content
+        favoriteCount
+        createdAt
+        updatedAt
+        author {
+          id
+          username
+          avatar
+        }
+      }
+    }
+  }
+`;
