@@ -38,11 +38,13 @@ export const Note: FC<Props> = ({ note }) => {
         }
         subheader={timean.fromNow(new Date(note.createdAt))}
       />
-      <CardContent>
-        <Typography variant="body1" color="text.primary">
-          <Markdown>{note.content}</Markdown>
-        </Typography>
-      </CardContent>
+      <Link to={`/note/${note.id}`}>
+        <CardContent>
+          <Typography variant="body1" color="text.primary">
+            <Markdown>{note.content}</Markdown>
+          </Typography>
+        </CardContent>
+      </Link>
     </Card>
   );
 };

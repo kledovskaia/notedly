@@ -37,3 +37,21 @@ export const GET_NOTES = gql`
     }
   }
 `;
+export const GET_MY_NOTES = gql`
+  query myNotes {
+    me {
+      notes {
+        id
+        content
+        favoriteCount
+        createdAt
+        updatedAt
+        author {
+          id
+          username
+          avatar
+        }
+      }
+    }
+  }
+`;

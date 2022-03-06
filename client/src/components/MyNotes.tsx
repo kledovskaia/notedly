@@ -1,11 +1,12 @@
+import { useAppQuery } from '../hooks/useAppQuery';
 import { NotesContainer } from '../styles';
 import { Note } from './Note';
 
 export const MyNotes = () => {
-  const notes: TNote[] = [];
+  const { data } = useAppQuery<{ me: { notes: TNote[] } }>('GET_MY_NOTES');
   return (
     <NotesContainer>
-      {notes.map((note) => (
+      {data?.me?.notes?.map((note) => (
         <Note key={note.id} note={note} />
       ))}
     </NotesContainer>
