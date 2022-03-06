@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { LoadingContext } from '../context/Loading';
 import { useAppQuery } from '../hooks/useAppQuery';
-import { NoteFeedContainer } from '../styles';
+import { NotesContainer } from '../styles';
 import { Note } from './Note';
 
 export const NoteFeed = () => {
@@ -14,10 +14,10 @@ export const NoteFeed = () => {
   }, [loading]);
 
   return (
-    <NoteFeedContainer>
+    <NotesContainer>
       {data?.noteFeed?.notes?.map((note) => (
         <Note key={note.id} note={note} />
       ))}
-    </NoteFeedContainer>
+    </NotesContainer>
   );
 };

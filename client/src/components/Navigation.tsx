@@ -72,7 +72,7 @@ export const Navigation: FC<Props> = ({ open }) => {
           >
             <GitHub />
           </ListItemIcon>
-          <ListItemText primary="Source code" sx={{ opacity: open ? 1 : 0 }} />
+          <ListItemText primary="Source Code" sx={{ opacity: open ? 1 : 0 }} />
         </ListItemButton>
       </a>
     </List>

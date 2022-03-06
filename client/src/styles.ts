@@ -14,7 +14,7 @@ export const Link = styled(RLink)`
   text-decoration: none;
 `;
 
-export const NoteFeedContainer = styled.section`
+export const NotesContainer = styled.section`
   padding: 4rem 0;
   display: grid;
   gap: 2rem;
