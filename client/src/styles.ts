@@ -3,6 +3,14 @@ import { Link as RLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 export const GlobalStyles = createGlobalStyle`
+  html {
+    box-sizing: border-box;
+  }
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
@@ -14,7 +22,14 @@ export const Link = styled(RLink)`
   text-decoration: none;
 `;
 
+export const FeedConainer = styled.section`
+  min-height: 93vh;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const NotesContainer = styled.section`
+  flex: 1;
   padding: 4rem 0;
   display: grid;
   gap: 2rem;
