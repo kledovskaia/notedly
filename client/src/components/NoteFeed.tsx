@@ -1,6 +1,6 @@
+import { Button } from '@mui/material';
 import { useAppQuery } from '../hooks/useAppQuery';
 import { FeedConainer, NotesContainer } from '../styles';
-import { LoadMore } from './LoadMore';
 import { Note } from './Note';
 
 export const NoteFeed = () => {
@@ -10,12 +10,18 @@ export const NoteFeed = () => {
 
   return (
     <FeedConainer>
-      <NotesContainer>
-        {data?.noteFeed?.notes?.map((note) => (
-          <Note key={note.id} note={note} />
-        ))}
-      </NotesContainer>
-      <LoadMore onClick={loadMore} />
+      {data && (
+        <>
+          <NotesContainer>
+            {data.noteFeed.notes.map((note) => (
+              <Note key={note.id} note={note} />
+            ))}
+          </NotesContainer>
+          <Button onClick={loadMore} variant="outlined">
+            Load More
+          </Button>
+        </>
+      )}
     </FeedConainer>
   );
 };
