@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { useAppQuery } from '../hooks/useAppQuery';
 import { FeedConainer, NotesContainer } from '../styles';
-import { Note } from './Note';
+import { Note } from '../components/Note';
 
 type TDataResponse = { noteFeed: TNoteFeed };
 

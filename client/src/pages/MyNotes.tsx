@@ -1,14 +1,12 @@
 import { useAppQuery } from '../hooks/useAppQuery';
 import { NotesContainer } from '../styles';
-import { Note } from './Note';
+import { Note } from '../components/Note';
 
-export const Favorites = () => {
-  const { data } = useAppQuery<{ me: { favorites: TNote[] } }>(
-    'GET_MY_FAVORITE_NOTES'
-  );
+export const MyNotes = () => {
+  const { data } = useAppQuery<{ me: { notes: TNote[] } }>('GET_MY_NOTES');
   return (
     <NotesContainer>
-      {data?.me?.favorites?.map((note) => (
+      {data?.me?.notes?.map((note) => (
         <Note key={note.id} note={note} />
       ))}
     </NotesContainer>

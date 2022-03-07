@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useAppQuery } from '../hooks/useAppQuery';
-import { Note } from './Note';
+import { Note } from '../components/Note';
 
 export const NotePage = () => {
   const { id } = useParams();
