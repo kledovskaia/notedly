@@ -2,10 +2,12 @@ import { Button } from '@mui/material';
 import { useAppQuery } from '../hooks/useAppQuery';
 import { FeedConainer, NotesContainer } from '../styles';
 import { Note } from '../components/Note';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 type TDataResponse = { noteFeed: TNoteFeed };
 
 export const NoteFeed = () => {
+  useDocumentTitle('Home | Notedly');
   const { data, fetchMore } = useAppQuery<TDataResponse>('GET_NOTES');
 
   const loadMore = () => {

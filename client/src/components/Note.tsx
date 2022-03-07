@@ -20,7 +20,7 @@ export const Note: FC<Props> = ({ note }) => {
     <Card>
       <CardHeader
         avatar={
-          <Link to={`/users/${note.author.id}`}>
+          <Link to={`/user/${note.author.id}`}>
             <Avatar src={note.author.avatar} />
           </Link>
         }
@@ -34,7 +34,7 @@ export const Note: FC<Props> = ({ note }) => {
           </Box>
         }
         title={
-          <Link to={`/users/${note.author.id}`}>{note.author.username}</Link>
+          <Link to={`/user/${note.author.id}`}>{note.author.username}</Link>
         }
         subheader={timean.fromNow(new Date(note.createdAt))}
       />

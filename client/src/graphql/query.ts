@@ -73,3 +73,36 @@ export const GET_MY_FAVORITE_NOTES = gql`
     }
   }
 `;
+export const GET_USER_INFO = gql`
+  query userInfo($id: ID!) {
+    user(id: $id) {
+      id
+      username
+      avatar
+      notes {
+        id
+        content
+        favoriteCount
+        createdAt
+        updatedAt
+        author {
+          id
+          username
+          avatar
+        }
+      }
+      favorites {
+        id
+        content
+        favoriteCount
+        createdAt
+        updatedAt
+        author {
+          id
+          username
+          avatar
+        }
+      }
+    }
+  }
+`;
