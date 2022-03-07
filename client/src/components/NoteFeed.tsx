@@ -3,10 +3,28 @@ import { useAppQuery } from '../hooks/useAppQuery';
 import { FeedConainer, NotesContainer } from '../styles';
 import { Note } from './Note';
 
-export const NoteFeed = () => {
-  const { data, fetchMore } = useAppQuery<{ noteFeed: TNoteFeed }>('GET_NOTES');
+type TDataResponse = { noteFeed: TNoteFeed };
 
-  const loadMore = () => {};
+export const NoteFeed = () => {
+  const { data, fetchMore } = useAppQuery<TDataResponse>('GET_NOTES');
+
+  const loadMore = () => {
+    fetchMore({
+      variables: {
+        cursor: data?.noteFeed?.cursor,
+      },
+      updateQuery: (prevRes, { fetchMoreResult }) =>
+        ({
+          noteFeed: {
+            ...fetchMoreResult?.noteFeed,
+            notes: [
+              ...prevRes?.noteFeed?.notes,
+              ...(fetchMoreResult?.noteFeed?.notes || []),
+            ],
+          },
+        } as TDataResponse),
+    });
+  };
 
   return (
     <FeedConainer>
@@ -17,9 +35,11 @@ export const NoteFeed = () => {
               <Note key={note.id} note={note} />
             ))}
           </NotesContainer>
-          <Button onClick={loadMore} variant="outlined">
-            Load More
-          </Button>
+          {data.noteFeed.hasNextPage && (
+            <Button onClick={loadMore} variant="outlined">
+              Load More
+            </Button>
+          )}
         </>
       )}
     </FeedConainer>
