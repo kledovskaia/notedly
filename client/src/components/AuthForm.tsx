@@ -14,9 +14,15 @@ type Props = {
   type: 'Sign In' | 'Sign Up';
   validationSchema: ObjectSchema<any>;
   fields: TField[];
+  onSubmit: (values: any) => void;
 };
 
-export const AuthForm: FC<Props> = ({ type, validationSchema, fields }) => {
+export const AuthForm: FC<Props> = ({
+  type,
+  validationSchema,
+  fields,
+  onSubmit,
+}) => {
   return (
     <Paper
       sx={{ padding: '2rem 3rem', margin: '4rem auto', maxWidth: '50rem' }}
@@ -31,19 +37,23 @@ export const AuthForm: FC<Props> = ({ type, validationSchema, fields }) => {
           }
         }
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={onSubmit}
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
             {fields.map((field) => (
               <TextField
+                autoComplete="new-password"
                 key={field.name}
                 fullWidth
                 id={field.name}
                 name={field.name}
-                label={errors[field.name] || field.label}
+                type={field.type}
+                label={
+                  touched[field.name] && Boolean(errors[field.name])
+                    ? errors[field.name]
+                    : field.label
+                }
                 value={values[field.name]}
                 onChange={handleChange}
                 error={touched[field.name] && Boolean(errors[field.name])}

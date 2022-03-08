@@ -37,15 +37,26 @@ const fields = [
 
 export const SignUp = () => {
   useDocumentTitle('Sign Up | Notedly');
-  const [signUp] = useAppMutation<TDataResponse>('SIGN_IN', {
+  const [signUp] = useAppMutation<TDataResponse>('SIGN_UP', {
     onCompleted: ({ signUp: token }: TDataResponse) => console.log(token),
   });
+
+  const handleSubmit = (values: any) => {
+    signUp({
+      variables: {
+        email: values.emailOrPassword,
+        username: values.emailOrPassword,
+        password: values.password,
+      },
+    });
+  };
 
   return (
     <AuthForm
       type="Sign Up"
       fields={fields}
       validationSchema={validationSchema}
+      onSubmit={handleSubmit}
     />
   );
 };

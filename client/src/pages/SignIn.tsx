@@ -1,3 +1,4 @@
+import { valueFromASTUntyped } from 'graphql';
 import * as Yup from 'yup';
 import { AuthForm } from '../components/AuthForm';
 import { useAppMutation } from '../hooks/useAppMutation';
@@ -30,11 +31,22 @@ export const SignIn = () => {
     onCompleted: ({ signIn: token }: TDataResponse) => console.log(token),
   });
 
+  const handleSubmit = (values: any) => {
+    signIn({
+      variables: {
+        email: values.email,
+        username: values.username,
+        password: values.password,
+      },
+    });
+  };
+
   return (
     <AuthForm
       type="Sign In"
       fields={fields}
       validationSchema={validationSchema}
+      onSubmit={handleSubmit}
     />
   );
 };
