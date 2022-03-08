@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { AuthForm } from '../components/AuthForm';
 import { useAppMutation } from '../hooks/useAppMutation';
@@ -37,8 +38,13 @@ const fields = [
 
 export const SignUp = () => {
   useDocumentTitle('Sign Up | Notedly');
+  const navigate = useNavigate();
+
   const [signUp] = useAppMutation<TDataResponse>('SIGN_UP', {
-    onCompleted: ({ signUp: token }: TDataResponse) => console.log(token),
+    onCompleted: ({ signUp: token }: TDataResponse) => {
+      localStorage.setItem('notedly-token', token.toString());
+      navigate('/');
+    },
   });
 
   const handleSubmit = (values: any) => {

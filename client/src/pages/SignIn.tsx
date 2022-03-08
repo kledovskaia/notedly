@@ -1,5 +1,5 @@
-import { valueFromASTUntyped } from 'graphql';
 import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import { AuthForm } from '../components/AuthForm';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
@@ -27,8 +27,13 @@ const fields = [
 
 export const SignIn = () => {
   useDocumentTitle('Sign In | Notedly');
+  const navigate = useNavigate();
+
   const [signIn] = useAppMutation<TDataResponse>('SIGN_IN', {
-    onCompleted: ({ signIn: token }: TDataResponse) => console.log(token),
+    onCompleted: ({ signIn: token }: TDataResponse) => {
+      localStorage.setItem('notedly-token', token.toString());
+      navigate('/');
+    },
   });
 
   const handleSubmit = (values: any) => {
