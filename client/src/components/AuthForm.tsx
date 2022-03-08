@@ -49,7 +49,7 @@ export const AuthForm: FC<Props> = ({ type, validationSchema, fields }) => {
                 error={touched[field.name] && Boolean(errors[field.name])}
               />
             ))}
-            <Button type="submit" variant="outlined" fullWidth>
+            <Button type="submit" variant="contained" size="large" fullWidth>
               Submit
             </Button>
           </Form>

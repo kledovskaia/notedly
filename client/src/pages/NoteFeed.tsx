@@ -38,7 +38,7 @@ export const NoteFeed = () => {
             ))}
           </NotesContainer>
           {data.noteFeed.hasNextPage && (
-            <Button onClick={loadMore} variant="outlined">
+            <Button onClick={loadMore} variant="contained" size="large">
               Load More
             </Button>
           )}
