@@ -32,10 +32,11 @@ export const SignIn = () => {
   });
 
   const handleSubmit = (values: any) => {
+    console.log(values);
     signIn({
       variables: {
-        email: values.email,
-        username: values.username,
+        email: values.usernameOrEmail,
+        username: values.usernameOrEmail,
         password: values.password,
       },
     });
