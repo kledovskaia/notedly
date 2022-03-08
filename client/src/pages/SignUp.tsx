@@ -44,8 +44,8 @@ export const SignUp = () => {
   const handleSubmit = (values: any) => {
     signUp({
       variables: {
-        email: values.emailOrPassword,
-        username: values.emailOrPassword,
+        email: values.email,
+        username: values.username,
         password: values.password,
       },
     });

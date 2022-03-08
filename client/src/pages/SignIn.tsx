@@ -32,7 +32,6 @@ export const SignIn = () => {
   });
 
   const handleSubmit = (values: any) => {
-    console.log(values);
     signIn({
       variables: {
         email: values.usernameOrEmail,
