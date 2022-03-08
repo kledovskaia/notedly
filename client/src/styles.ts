@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { Link as RLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import { Form as FForm } from 'formik';
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -43,5 +44,15 @@ export const NotesContainer = styled.section`
 export const Markdown = styled(ReactMarkdown)`
   p {
     margin: 0;
+  }
+`;
+export const Form = styled(FForm)`
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+
+  & > * + * {
+    display: block;
+    margin-top: 1rem !important;
   }
 `;

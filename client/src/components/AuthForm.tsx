@@ -1,7 +1,8 @@
-import { Paper, Typography } from '@mui/material';
+import { Button, Paper, TextField, Typography } from '@mui/material';
 import { FC } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik } from 'formik';
 import { ObjectSchema } from 'yup';
+import { Form } from '../styles';
 
 type Props = {
   type: 'Sign In' | 'Sign Up';
@@ -27,19 +28,21 @@ export const AuthForm: FC<Props> = ({ type, validationSchema }) => {
           console.log(values);
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, values, handleChange }) => (
           <Form>
-            <Field name="firstName" />
-            {errors.firstName && touched.firstName ? (
-              <div>{errors.firstName}</div>
-            ) : null}
-            <Field name="lastName" />
-            {errors.lastName && touched.lastName ? (
-              <div>{errors.lastName}</div>
-            ) : null}
-            <Field name="email" type="email" />
-            {errors.email && touched.email ? <div>{errors.email}</div> : null}
-            <button type="submit">Submit</button>
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              label="Email"
+              value={values.email}
+              onChange={handleChange}
+              error={touched.email && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+            />
+            <Button type="submit" variant="outlined" fullWidth>
+              Submit
+            </Button>
           </Form>
         )}
       </Formik>
