@@ -19,11 +19,22 @@ const validationSchema = Yup.object().shape({
     .required('Please enter your password'),
 });
 
+const fields = [
+  { name: 'usernameOrEmail', type: 'text', label: 'Username or Email *' },
+  { name: 'password', type: 'password', label: 'Password *' },
+];
+
 export const SignIn = () => {
   useDocumentTitle('Sign In | Notedly');
   const [signIn] = useAppMutation<TDataResponse>('SIGN_IN', {
     onCompleted: ({ signIn: token }: TDataResponse) => console.log(token),
   });
 
-  return <AuthForm type="Sign In" validationSchema={validationSchema} />;
+  return (
+    <AuthForm
+      type="Sign In"
+      fields={fields}
+      validationSchema={validationSchema}
+    />
+  );
 };

@@ -39,14 +39,14 @@ export const AuthForm: FC<Props> = ({ type, validationSchema, fields }) => {
           <Form>
             {fields.map((field) => (
               <TextField
+                key={field.name}
                 fullWidth
                 id={field.name}
                 name={field.name}
-                label={field.label}
+                label={errors[field.name] || field.label}
                 value={values[field.name]}
                 onChange={handleChange}
                 error={touched[field.name] && Boolean(errors[field.name])}
-                helperText={touched[field.name] && errors[field.name]}
               />
             ))}
             <Button type="submit" variant="outlined" fullWidth>
