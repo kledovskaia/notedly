@@ -4,12 +4,19 @@ import { Formik } from 'formik';
 import { ObjectSchema } from 'yup';
 import { Form } from '../styles';
 
+type TField = {
+  name: string;
+  type: string;
+  label: string;
+};
+
 type Props = {
   type: 'Sign In' | 'Sign Up';
   validationSchema: ObjectSchema<any>;
+  fields: TField[];
 };
 
-export const AuthForm: FC<Props> = ({ type, validationSchema }) => {
+export const AuthForm: FC<Props> = ({ type, validationSchema, fields }) => {
   return (
     <Paper
       sx={{ padding: '2rem 3rem', margin: '4rem auto', maxWidth: '50rem' }}
@@ -18,11 +25,11 @@ export const AuthForm: FC<Props> = ({ type, validationSchema }) => {
         {type}
       </Typography>
       <Formik
-        initialValues={{
-          firstName: '',
-          lastName: '',
-          email: '',
-        }}
+        initialValues={
+          fields.reduce((acc, field) => ({ ...acc, [field.name]: '' }), {}) as {
+            [key in string]: string;
+          }
+        }
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
@@ -30,16 +37,18 @@ export const AuthForm: FC<Props> = ({ type, validationSchema }) => {
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
-            <TextField
-              fullWidth
-              id="email"
-              name="email"
-              label="Email"
-              value={values.email}
-              onChange={handleChange}
-              error={touched.email && Boolean(errors.email)}
-              helperText={touched.email && errors.email}
-            />
+            {fields.map((field) => (
+              <TextField
+                fullWidth
+                id={field.name}
+                name={field.name}
+                label={field.label}
+                value={values[field.name]}
+                onChange={handleChange}
+                error={touched[field.name] && Boolean(errors[field.name])}
+                helperText={touched[field.name] && errors[field.name]}
+              />
+            ))}
             <Button type="submit" variant="outlined" fullWidth>
               Submit
             </Button>
