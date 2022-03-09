@@ -9,9 +9,9 @@ type TDataResponse = {
 export const User = () => {
   const { id } = useParams();
   const { data } = useAppQuery<TDataResponse>('GET_USER_INFO', {
-    variabels: { id },
+    variables: { id },
   });
-  useDocumentTitle(`${data?.user?.username} | Notedly`);
+  useDocumentTitle(`${data?.user?.username || 'Loading...'} | Notedly`);
 
   return <div>User</div>;
 };

@@ -6,12 +6,13 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export const NotePage = () => {
   const { id } = useParams();
-  const { data, loading, error, fetchMore } = useAppQuery<{ note: TNote }>(
-    'GET_NOTE',
-    { variables: { id } }
-  );
+  const { data } = useAppQuery<{ note: TNote }>('GET_NOTE', {
+    variables: { id },
+  });
   useDocumentTitle(
-    `${data?.note.content.split(' ').slice(1, 4).join(' ')}... | Notedly`
+    `${data && data.note.content.slice(0, 10)}${
+      data && data.note.content.length >= 10 ? '...' : ''
+    } | Notedly`
   );
 
   return (
