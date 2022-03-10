@@ -1,7 +1,11 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, {
+  createGlobalStyle,
+  IntrinsicElementsKeys,
+} from 'styled-components';
 import { Link as RLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Form as FForm } from 'formik';
+import { ComponentType } from 'react';
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -56,3 +60,15 @@ export const Form = styled(FForm)`
     margin-top: 1rem !important;
   }
 `;
+
+export const ButtonLink = styled(RLink)`
+  padding: 0.5rem;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const SignUpLink = styled(ButtonLink)`
+  color: #42a5f5;
+`;
+export const SignInLink = styled(ButtonLink)``;

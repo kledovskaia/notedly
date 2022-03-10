@@ -73,6 +73,17 @@ export const GET_MY_FAVORITE_NOTES = gql`
     }
   }
 `;
+
+export const GET_MY_BASIC_INFO = gql`
+  query myHeaderInfo {
+    me {
+      id
+      avatar
+      username
+    }
+  }
+`;
+
 export const GET_USER_INFO = gql`
   query userInfo($id: ID!) {
     user(id: $id) {

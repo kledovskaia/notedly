@@ -1,22 +1,34 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Avatar } from '@mui/material';
 import { ThemeSwitch } from './ThemeSwitch';
+import { MouseEvent, useContext, useState } from 'react';
+import { AuthContext } from '../context/Auth';
+import { SignInLink, SignUpLink } from '../styles';
+import { useAppQuery } from '../hooks/useAppQuery';
+import { Link } from 'react-router-dom';
+
+type TDataResponse = {
+  me: {
+    id: TUser['id'];
+    avatar: TUser['avatar'];
+    username: TUser['username'];
+  };
+};
 
 export default function Header() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { isLoggedIn, logout } = useContext(AuthContext);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { data } = useAppQuery<TDataResponse>('GET_MY_BASIC_INFO');
 
   const isMenuOpen = Boolean(anchorEl);
 
-  const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -24,26 +36,12 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    handleMenuClose();
+    logout();
+  };
+
   const menuId = 'account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-    </Menu>
-  );
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -55,21 +53,48 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <ThemeSwitch />
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <Avatar alt="username" src="/static/images/avatar/1.jpg" />
-            </IconButton>
+            {!isLoggedIn && (
+              <>
+                <SignUpLink to="/sign-up">Sign Up</SignUpLink>
+                <SignInLink to="/sign-in">Sign In</SignInLink>
+              </>
+            )}
+            {isLoggedIn && data && (
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <Avatar alt={data.me.username} src={data.me.avatar} />
+              </IconButton>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
-      {renderMenu}
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        id={menuId}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+      >
+        <MenuItem onClick={handleMenuClose}>
+          <Link to={`/user/${data?.me.id}`}>Profile</Link>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      </Menu>
     </Box>
   );
 }
