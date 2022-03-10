@@ -7,8 +7,10 @@ import {
 import { setContext } from 'apollo-link-context';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { Loader } from './components/Loader';
+import { AuthContext, AuthContextProvider } from './context/Auth';
 import { LoadingContextProvider } from './context/Loading';
 import { ThemeContextProvider } from './context/Theme';
 import { GlobalStyles } from './styles';
@@ -35,15 +37,19 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <ThemeContextProvider>
-        <LoadingContextProvider>
-          <App />
-          <Loader />
-          <GlobalStyles />
-        </LoadingContextProvider>
-      </ThemeContextProvider>
-    </ApolloProvider>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <ThemeContextProvider>
+          <LoadingContextProvider>
+            <AuthContextProvider>
+              <App />
+              <Loader />
+              <GlobalStyles />
+            </AuthContextProvider>
+          </LoadingContextProvider>
+        </ThemeContextProvider>
+      </ApolloProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
