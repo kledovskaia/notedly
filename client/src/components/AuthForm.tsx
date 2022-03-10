@@ -2,7 +2,7 @@ import { Button, Paper, TextField, Typography } from '@mui/material';
 import { FC } from 'react';
 import { Formik } from 'formik';
 import { ObjectSchema } from 'yup';
-import { Form } from '../styles';
+import { Form, Link } from '../styles';
 
 type TField = {
   name: string;
@@ -65,6 +65,16 @@ export const AuthForm: FC<Props> = ({
           </Form>
         )}
       </Formik>
+      {type === 'Sign In' && (
+        <Typography align="center">
+          Don't have an account? <Link to="/sign-up">Sign Up</Link>
+        </Typography>
+      )}
+      {type === 'Sign Up' && (
+        <Typography align="center">
+          Already have an account? <Link to="/sign-in">Sign In</Link>
+        </Typography>
+      )}
     </Paper>
   );
 };

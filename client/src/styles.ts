@@ -22,11 +22,6 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export const Link = styled(RLink)`
-  color: inherit;
-  text-decoration: none;
-`;
-
 export const FeedConainer = styled.section`
   min-height: 93vh;
   display: flex;
@@ -61,14 +56,14 @@ export const Form = styled(FForm)`
   }
 `;
 
-export const ButtonLink = styled(RLink)`
-  padding: 0.5rem;
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-export const SignUpLink = styled(ButtonLink)`
+export const Link = styled(RLink)`
   color: #42a5f5;
 `;
-export const SignInLink = styled(ButtonLink)``;
+
+export const SignUpLink = styled(Link)`
+  padding: 0.5rem;
+`;
+export const SignInLink = styled(Link)`
+  padding: 0.5rem;
+  color: #fff;
+`;

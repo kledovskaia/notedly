@@ -1,5 +1,5 @@
 import { createContext, FC, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type TAuthContext = {
   isLoggedIn: boolean;
@@ -12,13 +12,14 @@ export const AuthContext = createContext<TAuthContext>(null!);
 export const AuthContextProvider: FC = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     setIsLoggedIn(!!localStorage.getItem('notedly-token'));
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) navigate('/');
+    if (isLoggedIn) navigate(`${location.state}` || '/', { replace: true });
   }, [isLoggedIn]);
 
   const logout = () => {
