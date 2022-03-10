@@ -12,6 +12,7 @@ import { AuthContext } from '../context/Auth';
 import { SignInLink, SignUpLink } from '../styles';
 import { useAppQuery } from '../hooks/useAppQuery';
 import { Link } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
 
 type TDataResponse = {
   me: {
@@ -60,17 +61,33 @@ export default function Header() {
               </>
             )}
             {isLoggedIn && data && (
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Avatar alt={data.me.username} src={data.me.avatar} />
-              </IconButton>
+              <>
+                <Box sx={{ marginRight: '1rem' }}>
+                  <Link to="/note/new">
+                    <IconButton
+                      size="large"
+                      edge="end"
+                      aria-label="account of current user"
+                      aria-controls={menuId}
+                      aria-haspopup="true"
+                      color="inherit"
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </Link>
+                </Box>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <Avatar alt={data.me.username} src={data.me.avatar} />
+                </IconButton>
+              </>
             )}
           </Box>
         </Toolbar>

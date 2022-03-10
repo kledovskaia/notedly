@@ -5,6 +5,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { AuthContext } from './context/Auth';
 import { Favorites } from './pages/Favorites';
 import { MyNotes } from './pages/MyNotes';
+import { NewNote } from './pages/NewNote';
 import { NoteFeed } from './pages/NoteFeed';
 import { NotePage } from './pages/NotePage';
 import { SignIn } from './pages/SignIn';
@@ -31,6 +32,7 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/note/new" element={<NewNote />} />
         <Route path="/note/:id" element={<NotePage />} />
         <Route path="/user/:id" element={<User />} />
         <Route path="/sign-up" element={<SignUp />} />
