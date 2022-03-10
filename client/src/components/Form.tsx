@@ -31,7 +31,6 @@ export const Form: FC<Props> = ({ fields, onSubmit, validationSchema }) => {
         <FForm>
           {fields.map((field) => (
             <TextField
-              multiline
               autoComplete="new-password"
               key={field.name}
               fullWidth

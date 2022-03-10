@@ -42,8 +42,8 @@ export const SignUp = () => {
   const { setIsLoggedIn } = useContext(AuthContext);
 
   const [signUp] = useAppMutation<TDataResponse>('SIGN_UP', {
-    onCompleted: ({ signUp: token }: TDataResponse) => {
-      localStorage.setItem('notedly-token', token.toString());
+    onCompleted: ({ signUp: token }: { signUp: string }) => {
+      localStorage.setItem('notedly-token', token);
       setIsLoggedIn(true);
     },
   });
