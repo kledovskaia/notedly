@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthForm } from '../components/AuthForm';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { useApolloClient } from '@apollo/client';
+import { AuthContext } from '../context/Auth';
+import { useContext } from 'react';
 
 type TDataResponse = {
   signIn: {
@@ -29,11 +30,12 @@ const fields = [
 export const SignIn = () => {
   useDocumentTitle('Sign In | Notedly');
   const navigate = useNavigate();
-  const client = useApolloClient();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const [signIn] = useAppMutation<TDataResponse>('SIGN_IN', {
     onCompleted: ({ signIn: token }: TDataResponse) => {
       localStorage.setItem('notedly-token', token.toString());
+      setIsLoggedIn(true);
       navigate('/');
     },
   });

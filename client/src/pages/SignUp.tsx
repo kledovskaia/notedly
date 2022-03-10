@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { AuthForm } from '../components/AuthForm';
+import { AuthContext } from '../context/Auth';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
@@ -39,10 +41,12 @@ const fields = [
 export const SignUp = () => {
   useDocumentTitle('Sign Up | Notedly');
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const [signUp] = useAppMutation<TDataResponse>('SIGN_UP', {
     onCompleted: ({ signUp: token }: TDataResponse) => {
       localStorage.setItem('notedly-token', token.toString());
+      setIsLoggedIn(true);
       navigate('/');
     },
   });
