@@ -37,8 +37,7 @@ export const AuthContextProvider: FC = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    if (!isLoggedIn) setUserData(null);
-    else fetchMore({});
+    fetchMore({});
   }, [isLoggedIn]);
 
   useEffect(() => {
@@ -47,15 +46,15 @@ export const AuthContextProvider: FC = ({ children }) => {
 
   useEffect(() => {
     if (token === null) return;
+    if (token) localStorage.setItem('notedly-token', token);
+    if (!token) localStorage.removeItem('notedly-token');
     setIsLoggedIn(!!token);
   }, [token]);
 
   const logout = () => {
-    localStorage.removeItem('notedly-token');
     setToken('');
   };
   const login = (token: string) => {
-    localStorage.setItem('notedly-token', token);
     setToken(token);
   };
 

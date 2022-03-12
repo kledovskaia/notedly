@@ -3,9 +3,11 @@ import { NotesContainer } from '../styles';
 import { Note } from '../components/Note';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
+type TDataResponse = { me: { notes: TNote[] } };
+
 export const MyNotes = () => {
   useDocumentTitle('My Notes | Notedly');
-  const { data } = useAppQuery<{ me: { notes: TNote[] } }>('GET_MY_NOTES');
+  const { data } = useAppQuery<TDataResponse>('GET_MY_NOTES');
   return (
     <NotesContainer>
       {[...(data?.me?.notes || [])]
