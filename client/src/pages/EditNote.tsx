@@ -56,17 +56,21 @@ export const EditNote = () => {
   );
 
   return (
-    <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>
-      <Typography variant="h4" component="h2">
-        Edit Note
-      </Typography>
-      <Box sx={{ padding: '1.5rem 0 2rem' }}>
-        <Form
-          fields={fields}
-          validationSchema={validationSchema}
-          onSubmit={onSubmit}
-        />
-      </Box>
-    </Paper>
+    <>
+      {data && (
+        <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>
+          <Typography variant="h4" component="h2">
+            Edit Note
+          </Typography>
+          <Box sx={{ padding: '1.5rem 0 2rem' }}>
+            <Form
+              fields={fields}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            />
+          </Box>
+        </Paper>
+      )}
+    </>
   );
 };
