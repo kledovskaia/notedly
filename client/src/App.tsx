@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { MiniDrawer } from './components/Drawer';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { EditNote } from './pages/EditNote';
 import { Favorites } from './pages/Favorites';
 import { MyNotes } from './pages/MyNotes';
 import { NewNote } from './pages/NewNote';
@@ -30,7 +31,8 @@ export const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/note/new" element={<NewNote />} />
+        <Route path="/edit/:id" element={<EditNote />} />
+        <Route path="/new" element={<NewNote />} />
         <Route path="/note/:id" element={<NotePage />} />
         <Route path="/user/:id" element={<User />} />
         <Route path="/sign-up" element={<SignUp />} />

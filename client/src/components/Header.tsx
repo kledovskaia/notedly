@@ -54,7 +54,7 @@ export default function Header() {
             {isLoggedIn && userData && (
               <>
                 <Box sx={{ marginRight: '1rem' }}>
-                  <Link to="/note/new">
+                  <Link to="/new">
                     <IconButton
                       size="large"
                       edge="end"

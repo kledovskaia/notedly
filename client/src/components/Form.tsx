@@ -8,6 +8,7 @@ type TField = {
   name: string;
   type: string;
   label: string;
+  value?: string;
 };
 
 type Props = {
@@ -20,7 +21,10 @@ export const Form: FC<Props> = ({ fields, onSubmit, validationSchema }) => {
   return (
     <Formik
       initialValues={
-        fields.reduce((acc, field) => ({ ...acc, [field.name]: '' }), {}) as {
+        fields.reduce(
+          (acc, field) => ({ ...acc, [field.name]: field.value || '' }),
+          {}
+        ) as {
           [key in string]: string;
         }
       }

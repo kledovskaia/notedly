@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import EditIcon from '@mui/icons-material/Edit';
 import { FC } from 'react';
 import { Link, Markdown } from '../styles';
 
@@ -31,6 +32,11 @@ export const Note: FC<Props> = ({ note }) => {
               {/* <FavoriteIcon color="error" /> */}
               <FavoriteBorderIcon />
             </IconButton>
+            <Link to={`/edit/${note.id}`}>
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+            </Link>
           </Box>
         }
         title={
