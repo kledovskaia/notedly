@@ -37,11 +37,6 @@ export const AuthContextProvider: FC = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    if (!isLoggedIn) setUserData(null);
-    else fetchMore({});
-  }, [isLoggedIn]);
-
-  useEffect(() => {
     if (isLoggedIn) navigate('/');
   }, [isLoggedIn]);
 
@@ -54,9 +49,11 @@ export const AuthContextProvider: FC = ({ children }) => {
 
   const logout = () => {
     setToken('');
+    setUserData(null);
   };
-  const login = (token: string) => {
+  const login = async (token: string) => {
     setToken(token);
+    await fetchMore({});
   };
 
   return (
