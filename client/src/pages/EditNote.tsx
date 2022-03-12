@@ -31,9 +31,7 @@ export const EditNote = () => {
   const navigate = useNavigate();
   const [updateNote] = useAppMutation<TDataResponse>('EDIT_NOTE', {
     refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
-    onCompleted: ({ updateNote: note }: { updateNote: TNote }) => {
-      navigate(`/note/${note.id}`);
-    },
+    onCompleted: () => navigate(`/note/${id}`),
   });
   const onSubmit = ({ content }: any) => {
     updateNote({

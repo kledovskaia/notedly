@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { FC, useContext } from 'react';
 import { Link, Markdown } from '../styles';
 import { AuthContext } from '../context/Auth';
@@ -25,17 +26,31 @@ type Props = {
 
 export const Note: FC<Props> = ({ note }) => {
   const { userData } = useContext(AuthContext);
+
   const [toggleFavorite] = useAppMutation('TOGGLE_FAVORITE', {
     refetchQueries: [
       { query: GET_MY_FAVORITE_NOTES },
       { query: GET_NOTES },
       { query: GET_MY_NOTES },
     ],
-    onCompleted: ({ toggleFavorite }: any) => {},
+  });
+  const [deleteNote] = useAppMutation('DELETE_NOTE', {
+    refetchQueries: [
+      { query: GET_MY_FAVORITE_NOTES },
+      { query: GET_NOTES },
+      { query: GET_MY_NOTES },
+    ],
   });
 
   const handleToggleFavorite = () => {
     toggleFavorite({
+      variables: {
+        id: note.id,
+      },
+    });
+  };
+  const handleDelete = () => {
+    deleteNote({
       variables: {
         id: note.id,
       },
@@ -64,11 +79,16 @@ export const Note: FC<Props> = ({ note }) => {
               )}
             </IconButton>
             {userData && userData.id === note.author.id && (
-              <Link to={`/edit/${note.id}`}>
-                <IconButton>
-                  <EditIcon />
+              <>
+                <Link to={`/edit/${note.id}`}>
+                  <IconButton>
+                    <EditIcon />
+                  </IconButton>
+                </Link>
+                <IconButton onClick={handleDelete}>
+                  <DeleteIcon />
                 </IconButton>
-              </Link>
+              </>
             )}
           </Box>
         }
