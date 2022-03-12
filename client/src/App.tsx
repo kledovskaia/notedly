@@ -9,7 +9,6 @@ import { NoteFeed } from './pages/NoteFeed';
 import { NotePage } from './pages/NotePage';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
-import { User } from './pages/User';
 
 export const App = () => {
   return (
@@ -34,7 +33,6 @@ export const App = () => {
         <Route path="/edit/:id" element={<EditNote />} />
         <Route path="/new" element={<NewNote />} />
         <Route path="/note/:id" element={<NotePage />} />
-        <Route path="/user/:id" element={<User />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/" element={<NoteFeed />} />

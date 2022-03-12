@@ -66,11 +66,7 @@ export const Note: FC<Props> = ({ note }) => {
   return (
     <Card>
       <CardHeader
-        avatar={
-          <Link to={`/user/${note.author.id}`}>
-            <Avatar src={note.author.avatar} />
-          </Link>
-        }
+        avatar={<Avatar src={note.author.avatar} />}
         action={
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography color="text.secondary">{note.favoriteCount}</Typography>
@@ -98,9 +94,7 @@ export const Note: FC<Props> = ({ note }) => {
             )}
           </Box>
         }
-        title={
-          <Link to={`/user/${note.author.id}`}>{note.author.username}</Link>
-        }
+        title={<Typography>{note.author.username}</Typography>}
         subheader={timean.fromNow(new Date(note.createdAt))}
       />
       <Link to={`/note/${note.id}`}>
