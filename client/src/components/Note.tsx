@@ -19,6 +19,7 @@ import {
   GET_MY_NOTES,
   GET_NOTES,
 } from '../graphql/query';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type Props = {
   note: TNote;
@@ -26,6 +27,8 @@ type Props = {
 
 export const Note: FC<Props> = ({ note }) => {
   const { userData } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [toggleFavorite] = useAppMutation('TOGGLE_FAVORITE', {
     refetchQueries: [
@@ -36,10 +39,13 @@ export const Note: FC<Props> = ({ note }) => {
   });
   const [deleteNote] = useAppMutation('DELETE_NOTE', {
     refetchQueries: [
-      { query: GET_MY_FAVORITE_NOTES },
       { query: GET_NOTES },
+      { query: GET_MY_FAVORITE_NOTES },
       { query: GET_MY_NOTES },
     ],
+    onCompleted: () => {
+      if (location.pathname === `/note/${note.id}`) navigate('/');
+    },
   });
 
   const handleToggleFavorite = () => {
@@ -68,14 +74,14 @@ export const Note: FC<Props> = ({ note }) => {
         action={
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography color="text.secondary">{note.favoriteCount}</Typography>
-            <IconButton>
+            <IconButton onClick={handleToggleFavorite}>
               {userData &&
               !!(note?.favoritedBy || [])?.find(
                 (user) => user.id === userData.id
               ) ? (
-                <FavoriteIcon onClick={handleToggleFavorite} color="error" />
+                <FavoriteIcon color="error" />
               ) : (
-                <FavoriteBorderIcon onClick={handleToggleFavorite} />
+                <FavoriteBorderIcon />
               )}
             </IconButton>
             {userData && userData.id === note.author.id && (

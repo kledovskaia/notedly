@@ -41,7 +41,6 @@ export const Markdown = styled(ReactMarkdown)`
   }
 `;
 export const Form = styled(FForm)`
-  padding: 2rem 0 1rem;
   display: flex;
   flex-direction: column;
 

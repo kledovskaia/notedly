@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { Paper } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { Form } from '../components/Form';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -47,19 +47,26 @@ export const EditNote = () => {
         name: 'content',
         type: 'text',
         label: 'Note *',
+        multiline: 'multiline',
         value: data?.note?.content,
+        rows: 7,
       },
     ],
     [data]
   );
 
   return (
-    <Paper sx={{ padding: '1rem 2rem', margin: '4rem 0' }}>
-      <Form
-        fields={fields}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      />
+    <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>
+      <Typography variant="h4" component="h2">
+        Edit Note
+      </Typography>
+      <Box sx={{ padding: '1.5rem 0 2rem' }}>
+        <Form
+          fields={fields}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        />
+      </Box>
     </Paper>
   );
 };

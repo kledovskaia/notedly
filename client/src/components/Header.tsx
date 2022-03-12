@@ -98,8 +98,8 @@ export default function Header() {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <Link to={`/user/${userData?.id}`}>
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <Link to={`/user/${userData?.id}`} onClick={handleMenuClose}>
+          <MenuItem>Profile</MenuItem>
         </Link>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>

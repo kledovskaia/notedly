@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { FC } from 'react';
 import { ObjectSchema } from 'yup';
 import { Link } from '../styles';
@@ -30,12 +30,13 @@ export const AuthForm: FC<Props> = ({
       <Typography variant="h4" component="h2">
         {type}
       </Typography>
-
-      <Form
-        fields={fields}
-        validationSchema={validationSchema}
-        onSubmit={onSubmit}
-      />
+      <Box sx={{ padding: '1rem 0 2rem' }}>
+        <Form
+          fields={fields}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        />
+      </Box>
       {type === 'Sign In' && (
         <Typography align="center">
           Don't have an account? <Link to="/sign-up">Sign Up</Link>

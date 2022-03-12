@@ -36,12 +36,11 @@ export const Form: FC<Props> = ({ fields, onSubmit, validationSchema }) => {
           <FForm>
             {fields.map((field) => (
               <TextField
+                {...field}
                 autoComplete="new-password"
                 key={field.name}
                 fullWidth
                 id={field.name}
-                name={field.name}
-                type={field.type}
                 label={
                   touched[field.name] && Boolean(errors[field.name])
                     ? errors[field.name]
