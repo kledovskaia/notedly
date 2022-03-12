@@ -2,11 +2,12 @@ import * as Yup from 'yup';
 import { Box, Paper, Typography } from '@mui/material';
 import { Form } from '../components/Form';
 import { useAppMutation } from '../hooks/useAppMutation';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { GET_MY_NOTES, GET_NOTES } from '../graphql/query';
 import { useAppQuery } from '../hooks/useAppQuery';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
+import { AuthContext } from '../context/Auth';
 
 const validationSchema = Yup.object().shape({
   content: Yup.string().required('Please enter your Note'),
@@ -19,6 +20,7 @@ type TDataResponse = {
 };
 
 export const EditNote = () => {
+  const { userData } = useContext(AuthContext);
   const { id } = useParams();
   const { data } = useAppQuery<{ note: TNote }>('GET_NOTE', {
     variables: { id },
@@ -57,6 +59,7 @@ export const EditNote = () => {
 
   return (
     <>
+      {data && data.note.id !== userData?.id && <Navigate to="/" />}
       {data && (
         <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>
           <Typography variant="h4" component="h2">
