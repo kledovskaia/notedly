@@ -2,6 +2,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { Link as RLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Form as FForm } from 'formik';
+import { Card } from '@mui/material';
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -58,4 +59,10 @@ export const SignUpLink = styled(Link)`
 export const SignInLink = styled(Link)`
   padding: 0.5rem;
   color: #fff;
+`;
+
+export const NoteContainer = styled(Card)`
+  a {
+    color: #1976d2;
+  }
 `;

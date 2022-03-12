@@ -11,7 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FC, useContext } from 'react';
-import { Link, Markdown } from '../styles';
+import { Link, Markdown, NoteContainer } from '../styles';
 import { AuthContext } from '../context/Auth';
 import { useAppMutation } from '../hooks/useAppMutation';
 import {
@@ -64,7 +64,7 @@ export const Note: FC<Props> = ({ note }) => {
   };
 
   return (
-    <Card>
+    <NoteContainer>
       <CardHeader
         avatar={<Avatar src={note.author.avatar} />}
         action={
@@ -104,6 +104,6 @@ export const Note: FC<Props> = ({ note }) => {
           </Typography>
         </CardContent>
       </Link>
-    </Card>
+    </NoteContainer>
   );
 };
