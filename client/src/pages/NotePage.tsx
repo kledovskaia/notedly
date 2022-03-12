@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useAppQuery } from '../hooks/useAppQuery';
 import { Note } from '../components/Note';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 export const NotePage = () => {
   const { id } = useParams();
-  const { data } = useAppQuery<{ note: TNote }>('GET_NOTE', {
+  const { data, loading } = useAppQuery<{ note: TNote }>('GET_NOTE', {
     variables: { id },
   });
   useDocumentTitle(
@@ -17,6 +17,7 @@ export const NotePage = () => {
 
   return (
     <>
+      {!loading && !data && <Navigate to="/" />}
       {data && (
         <Box sx={{ paddingTop: '4rem' }}>
           <Note note={data.note} />

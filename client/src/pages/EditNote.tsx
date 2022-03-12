@@ -22,7 +22,7 @@ type TDataResponse = {
 export const EditNote = () => {
   const { userData } = useContext(AuthContext);
   const { id } = useParams();
-  const { data } = useAppQuery<{ note: TNote }>('GET_NOTE', {
+  const { data, loading } = useAppQuery<{ note: TNote }>('GET_NOTE', {
     variables: { id },
   });
   useDocumentTitle(
@@ -59,6 +59,7 @@ export const EditNote = () => {
 
   return (
     <>
+      {!loading && !data && <Navigate to="/" />}
       {data && data.note.author.id !== userData?.id && <Navigate to="/" />}
       {data && (
         <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>

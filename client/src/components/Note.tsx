@@ -70,7 +70,11 @@ export const Note: FC<Props> = ({ note }) => {
         action={
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography color="text.secondary">{note.favoriteCount}</Typography>
-            <IconButton onClick={handleToggleFavorite}>
+            <IconButton
+              onClick={() =>
+                userData ? handleToggleFavorite() : navigate('/sign-in')
+              }
+            >
               {userData &&
               !!(note?.favoritedBy || [])?.find(
                 (user) => user.id === userData.id
