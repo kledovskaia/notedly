@@ -8,6 +8,7 @@ import { useAppQuery } from '../hooks/useAppQuery';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useContext, useMemo } from 'react';
 import { AuthContext } from '../context/Auth';
+import { NoteForm } from '../components/NoteForm';
 
 const validationSchema = Yup.object().shape({
   content: Yup.string().required('Please enter your Note'),
@@ -62,18 +63,12 @@ export const EditNote = () => {
       {!loading && !data && <Navigate to="/" />}
       {data && data.note.author.id !== userData?.id && <Navigate to="/" />}
       {data && (
-        <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>
-          <Typography variant="h4" component="h2">
-            Edit Note
-          </Typography>
-          <Box sx={{ padding: '1.5rem 0 2rem' }}>
-            <Form
-              fields={fields}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            />
-          </Box>
-        </Paper>
+        <NoteForm
+          title="Edit Note"
+          fields={fields}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        />
       )}
     </>
   );
