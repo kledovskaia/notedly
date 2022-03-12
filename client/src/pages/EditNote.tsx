@@ -59,7 +59,7 @@ export const EditNote = () => {
 
   return (
     <>
-      {data && data.note.id !== userData?.id && <Navigate to="/" />}
+      {data && data.note.author.id !== userData?.id && <Navigate to="/" />}
       {data && (
         <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>
           <Typography variant="h4" component="h2">
