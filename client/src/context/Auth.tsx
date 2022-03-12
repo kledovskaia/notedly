@@ -37,7 +37,8 @@ export const AuthContextProvider: FC = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    fetchMore({});
+    if (!isLoggedIn) setUserData(null);
+    else fetchMore({});
   }, [isLoggedIn]);
 
   useEffect(() => {
