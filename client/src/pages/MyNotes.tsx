@@ -8,9 +8,11 @@ export const MyNotes = () => {
   const { data } = useAppQuery<{ me: { notes: TNote[] } }>('GET_MY_NOTES');
   return (
     <NotesContainer>
-      {data?.me?.notes?.map((note) => (
-        <Note key={note.id} note={note} />
-      ))}
+      {[...(data?.me?.notes || [])]
+        .sort((a, b) => (b.id > a.id ? 1 : 0))
+        .map((note) => (
+          <Note key={note.id} note={note} />
+        ))}
     </NotesContainer>
   );
 };

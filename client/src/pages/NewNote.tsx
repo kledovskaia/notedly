@@ -3,6 +3,7 @@ import { Paper } from '@mui/material';
 import { Form } from '../components/Form';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useNavigate } from 'react-router-dom';
+import { GET_MY_NOTES, GET_NOTES } from '../graphql/query';
 
 const validationSchema = Yup.object().shape({
   content: Yup.string().required('Please enter your Note'),
@@ -19,6 +20,7 @@ type TDataResponse = {
 export const NewNote = () => {
   const navigate = useNavigate();
   const [newNote] = useAppMutation<TDataResponse>('NEW_NOTE', {
+    refetchQueries: [{ query: GET_NOTES }, { query: GET_MY_NOTES }],
     onCompleted: ({ newNote: note }: { newNote: TNote }) => {
       navigate(`/note/${note.id}`);
     },
