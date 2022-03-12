@@ -14,7 +14,7 @@ const fields = [
     name: 'content',
     type: 'text',
     label: 'Note *',
-    multiline: 'multiline',
+    multiline: true,
     rows: 7,
   },
 ];

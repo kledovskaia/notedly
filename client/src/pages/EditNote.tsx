@@ -47,7 +47,7 @@ export const EditNote = () => {
         name: 'content',
         type: 'text',
         label: 'Note *',
-        multiline: 'multiline',
+        multiline: true,
         value: data?.note?.content,
         rows: 7,
       },
