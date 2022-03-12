@@ -6,6 +6,9 @@ export const GET_NOTE = gql`
       id
       content
       favoriteCount
+      favoritedBy {
+        id
+      }
       createdAt
       updatedAt
       author {
@@ -26,6 +29,9 @@ export const GET_NOTES = gql`
         id
         content
         favoriteCount
+        favoritedBy {
+          id
+        }
         createdAt
         updatedAt
         author {
@@ -44,6 +50,9 @@ export const GET_MY_NOTES = gql`
         id
         content
         favoriteCount
+        favoritedBy {
+          id
+        }
         createdAt
         updatedAt
         author {
@@ -62,6 +71,9 @@ export const GET_MY_FAVORITE_NOTES = gql`
         id
         content
         favoriteCount
+        favoritedBy {
+          id
+        }
         createdAt
         updatedAt
         author {
@@ -94,6 +106,9 @@ export const GET_USER_INFO = gql`
         id
         content
         favoriteCount
+        favoritedBy {
+          id
+        }
         createdAt
         updatedAt
         author {
@@ -106,6 +121,9 @@ export const GET_USER_INFO = gql`
         id
         content
         favoriteCount
+        favoritedBy {
+          id
+        }
         createdAt
         updatedAt
         author {
