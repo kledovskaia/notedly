@@ -28,7 +28,7 @@ const signUp = async (_, { username, email, password }, { models }) => {
       password: hashed,
     });
 
-    return jwt.sign({ _id }, JWT_SECRET);
+    return jwt.sign({ id: _id }, JWT_SECRET);
   } catch (err) {
     console.error(err);
     throw new Error('Error Creating Account');
