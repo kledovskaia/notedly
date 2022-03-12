@@ -10,22 +10,13 @@ import { ThemeSwitch } from './ThemeSwitch';
 import { MouseEvent, useContext, useState } from 'react';
 import { AuthContext } from '../context/Auth';
 import { SignInLink, SignUpLink } from '../styles';
-import { useAppQuery } from '../hooks/useAppQuery';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
-
-type TDataResponse = {
-  me: {
-    id: TUser['id'];
-    avatar: TUser['avatar'];
-    username: TUser['username'];
-  };
-};
 
 export default function Header() {
   const { isLoggedIn, logout } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { data } = useAppQuery<TDataResponse>('GET_MY_BASIC_INFO');
+  const { userData } = useContext(AuthContext);
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -60,7 +51,7 @@ export default function Header() {
                 <SignInLink to="/sign-in">Sign In</SignInLink>
               </>
             )}
-            {isLoggedIn && data && (
+            {isLoggedIn && userData && (
               <>
                 <Box sx={{ marginRight: '1rem' }}>
                   <Link to="/note/new">
@@ -85,7 +76,7 @@ export default function Header() {
                   onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
-                  <Avatar alt={data?.me?.username} src={data?.me?.avatar} />
+                  <Avatar alt={userData.username} src={userData.avatar} />
                 </IconButton>
               </>
             )}
@@ -107,7 +98,7 @@ export default function Header() {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <Link to={`/user/${data?.me?.id}`}>
+        <Link to={`/user/${userData?.id}`}>
           <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
         </Link>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>

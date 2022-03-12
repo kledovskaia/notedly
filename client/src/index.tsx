@@ -18,14 +18,17 @@ import { GlobalStyles } from './styles';
 const uri = process.env.REACT_APP_API_URI;
 const httpLink = createHttpLink({ uri });
 const cache = new InMemoryCache();
-const token = localStorage.getItem('notedly-token');
 
-const authLink = setContext((_, { headers }) => ({
-  headers: {
-    ...headers,
-    authorization: token || '',
-  },
-}));
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('notedly-token');
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token || '',
+    },
+  };
+});
 
 const client = new ApolloClient({
   // @ts-ignore

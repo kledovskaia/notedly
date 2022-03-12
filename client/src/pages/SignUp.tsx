@@ -39,13 +39,10 @@ const fields = [
 
 export const SignUp = () => {
   useDocumentTitle('Sign Up | Notedly');
-  const { setIsLoggedIn } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const [signUp] = useAppMutation<TDataResponse>('SIGN_UP', {
-    onCompleted: ({ signUp: token }: { signUp: string }) => {
-      localStorage.setItem('notedly-token', token);
-      setIsLoggedIn(true);
-    },
+    onCompleted: ({ signUp: token }: { signUp: string }) => login(token),
   });
 
   const handleSubmit = (values: any) => {
