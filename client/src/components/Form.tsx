@@ -19,45 +19,47 @@ type Props = {
 
 export const Form: FC<Props> = ({ fields, onSubmit, validationSchema }) => {
   return (
-    <Formik
-      initialValues={
-        fields.reduce(
-          (acc, field) => ({ ...acc, [field.name]: field.value || '' }),
-          {}
-        ) as {
-          [key in string]: string;
+    fields && (
+      <Formik
+        initialValues={
+          fields.reduce(
+            (acc, field) => ({ ...acc, [field.name]: field?.value || '' }),
+            {}
+          ) as {
+            [key in string]: string;
+          }
         }
-      }
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ errors, touched, values, handleChange }) => (
-        <FForm>
-          {fields.map((field) => (
-            <TextField
-              autoComplete="new-password"
-              key={field.name}
-              fullWidth
-              id={field.name}
-              name={field.name}
-              type={field.type}
-              label={
-                touched[field.name] && Boolean(errors[field.name])
-                  ? errors[field.name]
-                  : field.label
-              }
-              value={values[field.name]}
-              onChange={handleChange}
-              error={
-                Boolean(touched[field.name]) && Boolean(errors[field.name])
-              }
-            />
-          ))}
-          <Button type="submit" variant="contained" size="large" fullWidth>
-            Submit
-          </Button>
-        </FForm>
-      )}
-    </Formik>
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {({ errors, touched, values, handleChange }) => (
+          <FForm>
+            {fields.map((field) => (
+              <TextField
+                autoComplete="new-password"
+                key={field.name}
+                fullWidth
+                id={field.name}
+                name={field.name}
+                type={field.type}
+                label={
+                  touched[field.name] && Boolean(errors[field.name])
+                    ? errors[field.name]
+                    : field.label
+                }
+                value={values[field.name]}
+                onChange={handleChange}
+                error={
+                  Boolean(touched[field.name]) && Boolean(errors[field.name])
+                }
+              />
+            ))}
+            <Button type="submit" variant="contained" size="large" fullWidth>
+              Submit
+            </Button>
+          </FForm>
+        )}
+      </Formik>
+    )
   );
 };

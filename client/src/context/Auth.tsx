@@ -13,7 +13,7 @@ type TAuthContext = {
   isLoggedIn: boolean;
   logout: () => void;
   login: (token: string) => void;
-  userData: Partial<TUser> | null;
+  userData: TDataResponse['me'] | null;
 };
 
 export const AuthContext = createContext<TAuthContext>(null!);
@@ -24,7 +24,7 @@ export const AuthContextProvider: FC = ({ children }) => {
     localStorage.getItem('notedly-token')
   );
   const { data, fetchMore } = useAppQuery<TDataResponse>('GET_MY_BASIC_INFO');
-  const [userData, setUserData] = useState<Partial<TUser> | null>(null);
+  const [userData, setUserData] = useState<TDataResponse['me'] | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {

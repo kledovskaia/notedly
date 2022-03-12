@@ -9,14 +9,17 @@ import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Link, Markdown } from '../styles';
+import { AuthContext } from '../context/Auth';
 
 type Props = {
   note: TNote;
 };
 
 export const Note: FC<Props> = ({ note }) => {
+  const { userData } = useContext(AuthContext);
+
   return (
     <Card>
       <CardHeader
@@ -29,14 +32,23 @@ export const Note: FC<Props> = ({ note }) => {
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography color="text.secondary">{note.favoriteCount}</Typography>
             <IconButton>
-              {/* <FavoriteIcon color="error" /> */}
-              <FavoriteBorderIcon />
+              {userData &&
+              -1 !==
+                (note?.favoritedBy || [])?.findIndex(
+                  (user) => user.id === userData.id
+                ) ? (
+                <FavoriteIcon color="error" />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
             </IconButton>
-            <Link to={`/edit/${note.id}`}>
-              <IconButton>
-                <EditIcon />
-              </IconButton>
-            </Link>
+            {userData && userData.id === note.author.id && (
+              <Link to={`/edit/${note.id}`}>
+                <IconButton>
+                  <EditIcon />
+                </IconButton>
+              </Link>
+            )}
           </Box>
         }
         title={
