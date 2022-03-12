@@ -9,9 +9,10 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { FC, ReactNode, useState } from 'react';
+import { FC, useState } from 'react';
 import Header from './Header';
 import { Navigation } from './Navigation';
+import { Main } from '../styles';
 
 const drawerWidth = 240;
 
@@ -30,7 +31,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `0`,
   [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
@@ -128,9 +129,7 @@ export const MiniDrawer: FC = ({ children }) => {
         <Divider />
         <Navigation open={open} />
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        {children}
-      </Box>
+      <Main component="main">{children}</Main>
     </Box>
   );
 };

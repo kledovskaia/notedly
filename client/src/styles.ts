@@ -3,10 +3,18 @@ import { Link as RLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Form as FForm } from 'formik';
 import { Card } from '@mui/material';
+import { Box } from '@mui/system';
 
 export const GlobalStyles = createGlobalStyle`
   html {
     box-sizing: border-box;
+    @media screen and (max-width: 40rem) {
+    font-size: 90%;
+    }
+  }
+
+  body {
+    overflow-x: hidden;
   }
 
   *, *::before, *::after {
@@ -33,6 +41,9 @@ export const NotesContainer = styled.section`
 
   @media screen and (max-width: 40rem) {
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+  @media screen and (max-width: 30rem) {
+    gap: 1rem;
   }
 `;
 
@@ -64,5 +75,14 @@ export const SignInLink = styled(Link)`
 export const NoteContainer = styled(Card)`
   a {
     color: #1976d2;
+  }
+`;
+
+export const Main = styled(Box)`
+  padding: 1.5rem;
+  flex-grow: 1;
+
+  @media screen and (max-width: 30rem) {
+    padding: 0.5rem 0;
   }
 `;
