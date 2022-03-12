@@ -107,9 +107,9 @@ export default function Header() {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>
-          <Link to={`/user/${data?.me?.id}`}>Profile</Link>
-        </MenuItem>
+        <Link to={`/user/${data?.me?.id}`}>
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        </Link>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </Box>
