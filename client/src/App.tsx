@@ -1,8 +1,6 @@
-import { FC, useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { MiniDrawer } from './components/Drawer';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import { AuthContext } from './context/Auth';
 import { Favorites } from './pages/Favorites';
 import { MyNotes } from './pages/MyNotes';
 import { NewNote } from './pages/NewNote';

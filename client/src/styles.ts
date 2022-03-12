@@ -56,9 +56,7 @@ export const Form = styled(FForm)`
   }
 `;
 
-export const Link = styled(RLink)`
-  color: #42a5f5;
-`;
+export const Link = styled(RLink)``;
 
 export const SignUpLink = styled(Link)`
   padding: 0.5rem;

@@ -13,7 +13,7 @@ type TDataResponse = {
 
 const validationSchema = Yup.object().shape({
   username: Yup.string()
-    .min(6, 'Too Short!')
+    .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Username is Required'),
   email: Yup.string()

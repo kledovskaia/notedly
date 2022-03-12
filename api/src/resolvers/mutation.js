@@ -55,10 +55,17 @@ const newNote = async (_, { content }, { models, user }) => {
     throw new AuthenticationError('You must be signed in to create a note');
   }
 
-  return await models.Note.create({
+  const note = await models.Note.create({
     content,
     author: mongoose.Types.ObjectId(user.id),
   });
+
+  await models.User.findByIdAndUpdate(user.id, {
+    $push: {
+      notes: mongoose.Types.ObjectId(note.id),
+    },
+  });
+  return note;
 };
 
 const updateNote = async (_, { id, content }, { models, user }) => {
@@ -100,6 +107,11 @@ const deleteNote = async (_, { id }, { models, user }) => {
   }
 
   try {
+    await models.User.findByIdAndUpdate(user.id, {
+      $pull: {
+        notes: mongoose.Types.ObjectId(note.id),
+      },
+    });
     await note.remove();
     return true;
   } catch (err) {

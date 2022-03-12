@@ -85,7 +85,7 @@ export default function Header() {
                   onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
-                  <Avatar alt={data.me.username} src={data.me.avatar} />
+                  <Avatar alt={data?.me?.username} src={data?.me?.avatar} />
                 </IconButton>
               </>
             )}
@@ -108,7 +108,7 @@ export default function Header() {
         onClose={handleMenuClose}
       >
         <MenuItem onClick={handleMenuClose}>
-          <Link to={`/user/${data?.me.id}`}>Profile</Link>
+          <Link to={`/user/${data?.me?.id}`}>Profile</Link>
         </MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>

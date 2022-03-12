@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { Loader } from './components/Loader';
-import { AuthContext, AuthContextProvider } from './context/Auth';
+import { AuthContextProvider } from './context/Auth';
 import { LoadingContextProvider } from './context/Loading';
 import { ThemeContextProvider } from './context/Theme';
 import { GlobalStyles } from './styles';
