@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useAppQuery } from '../hooks/useAppQuery';
 import { FeedConainer, NotesContainer } from '../styles';
 import { Note } from '../components/Note';
@@ -37,6 +37,7 @@ export const NoteFeed = () => {
               <Note key={note.id} note={note} />
             ))}
           </NotesContainer>
+          <Box sx={{ flex: 1 }}></Box>
           {data.noteFeed.hasNextPage && (
             <Button onClick={loadMore} variant="contained" size="large">
               Load More

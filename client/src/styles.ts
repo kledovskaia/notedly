@@ -1,11 +1,7 @@
-import styled, {
-  createGlobalStyle,
-  IntrinsicElementsKeys,
-} from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Link as RLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Form as FForm } from 'formik';
-import { ComponentType } from 'react';
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -29,7 +25,6 @@ export const FeedConainer = styled.section`
 `;
 
 export const NotesContainer = styled.section`
-  flex: 1;
   padding: 4rem 0;
   display: grid;
   gap: 2rem;
