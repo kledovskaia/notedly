@@ -8,6 +8,7 @@ export const Favorites = () => {
   const { data } = useAppQuery<{ me: { favorites: TNote[] } }>(
     'GET_MY_FAVORITE_NOTES'
   );
+
   return (
     <NotesContainer>
       {data?.me?.favorites?.map((note) => (

@@ -1,7 +1,6 @@
 import { createContext, FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppQuery } from '../hooks/useAppQuery';
-
 type TDataResponse = {
   me: {
     id: TUser['id'];

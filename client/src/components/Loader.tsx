@@ -3,12 +3,14 @@ import { useContext } from 'react';
 import { LoadingContext } from '../context/Loading';
 
 export const Loader = () => {
-  const { isLoading } = useContext(LoadingContext);
+  const { loadingState } = useContext(LoadingContext);
 
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={isLoading}
+      open={Object.entries(loadingState).some(
+        ([_, value]: [string, boolean]) => value
+      )}
     >
       <CircularProgress color="inherit" />
     </Backdrop>

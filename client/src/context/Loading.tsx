@@ -1,8 +1,9 @@
-import { createContext, Dispatch, FC, SetStateAction, useState } from 'react';
+import { createContext, FC, useState } from 'react';
 
+type TLoadingState = { [key in string]: boolean };
 type TLoadingContext = {
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  loadingState: TLoadingState;
+  updateLoadingState: (update: TLoadingState) => void;
 };
 
 export const LoadingContext = createContext<TLoadingContext>(
@@ -10,10 +11,13 @@ export const LoadingContext = createContext<TLoadingContext>(
 );
 
 export const LoadingContextProvider: FC = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [loadingState, setLoadingState] = useState<TLoadingState>({});
+
+  const updateLoadingState = (update: TLoadingState) =>
+    setLoadingState((state) => ({ ...state, ...update }));
 
   return (
-    <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+    <LoadingContext.Provider value={{ loadingState, updateLoadingState }}>
       {children}
     </LoadingContext.Provider>
   );

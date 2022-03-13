@@ -1,6 +1,4 @@
 import * as Yup from 'yup';
-import { Box, Paper, Typography } from '@mui/material';
-import { Form } from '../components/Form';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { GET_MY_NOTES, GET_NOTES } from '../graphql/query';
@@ -44,6 +42,7 @@ export const EditNote = () => {
       },
     });
   };
+
   const fields = useMemo(
     () => [
       {

@@ -10,13 +10,11 @@ export const useAppMutation = <T>(
   options?: OperationVariables
 ) => {
   const result = useMutation<T>(mutations[type], options);
-
-  const { isLoading, setIsLoading } = useContext(LoadingContext);
-  const [, { loading }] = result;
+  const { updateLoadingState } = useContext(LoadingContext);
 
   useEffect(() => {
-    if (loading !== isLoading) setIsLoading(loading);
-  }, [loading]);
+    updateLoadingState({ [type]: result[1].loading });
+  }, [result[1].loading]);
 
   return result;
 };

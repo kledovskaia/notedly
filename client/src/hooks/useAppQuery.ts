@@ -7,10 +7,10 @@ type TQuery = keyof typeof queries;
 
 export const useAppQuery = <T>(type: TQuery, options?: OperationVariables) => {
   const result = useQuery<T>(queries[type], options);
-  const { isLoading, setIsLoading } = useContext(LoadingContext);
+  const { updateLoadingState } = useContext(LoadingContext);
 
   useEffect(() => {
-    if (isLoading !== result.loading) setIsLoading(result.loading);
+    updateLoadingState({ [type]: result.loading });
   }, [result.loading]);
 
   return result;
