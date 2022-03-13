@@ -42,17 +42,19 @@ export const AuthContextProvider: FC = ({ children }) => {
   useEffect(() => {
     if (token === null) return;
     if (token) localStorage.setItem('notedly-token', token);
-    if (!token) localStorage.removeItem('notedly-token');
+    if (!token) {
+      setUserData(null);
+      localStorage.removeItem('notedly-token');
+    }
     setIsLoggedIn(!!token);
+    fetchMore({});
   }, [token]);
 
   const logout = () => {
     setToken('');
-    setUserData(null);
   };
-  const login = async (token: string) => {
+  const login = (token: string) => {
     setToken(token);
-    await fetchMore({});
   };
 
   return (
