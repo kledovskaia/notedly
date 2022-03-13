@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { AuthForm } from '../components/AuthForm';
 import { AuthContext } from '../context/Auth';
@@ -41,9 +41,13 @@ export const SignUp = () => {
   useDocumentTitle('Sign Up | Notedly');
   const { login } = useContext(AuthContext);
 
-  const [signUp] = useAppMutation<TDataResponse>('SIGN_UP', {
-    onCompleted: ({ signUp: token }: { signUp: string }) => login(token),
-  });
+  const [signUp, { error: signUpError }] = useAppMutation<TDataResponse>(
+    'SIGN_UP',
+    {
+      onCompleted: ({ signUp: token }: { signUp: string }) => login(token),
+    }
+  );
+  const [error, setError] = useState(signUpError);
 
   const handleSubmit = (values: any) => {
     signUp({
@@ -55,8 +59,16 @@ export const SignUp = () => {
     });
   };
 
+  useEffect(() => {
+    setError(signUpError);
+  }, [signUpError]);
+
+  const resetError = () => setError(undefined);
+
   return (
     <AuthForm
+      resetError={resetError}
+      error={error}
       type="Sign Up"
       fields={fields}
       validationSchema={validationSchema}

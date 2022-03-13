@@ -3,7 +3,7 @@ import { AuthForm } from '../components/AuthForm';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { AuthContext } from '../context/Auth';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 type TDataResponse = {
   signIn: {
@@ -30,9 +30,17 @@ export const SignIn = () => {
   useDocumentTitle('Sign In | Notedly');
   const { login } = useContext(AuthContext);
 
-  const [signIn] = useAppMutation<TDataResponse>('SIGN_IN', {
-    onCompleted: ({ signIn: token }: { signIn: string }) => login(token),
-  });
+  const [signIn, { error: signInError }] = useAppMutation<TDataResponse>(
+    'SIGN_IN',
+    {
+      onCompleted: ({ signIn: token }: { signIn: string }) => login(token),
+    }
+  );
+  const [error, setError] = useState(signInError);
+
+  useEffect(() => {
+    setError(signInError);
+  }, [signInError]);
 
   const handleSubmit = (values: any) => {
     signIn({
@@ -44,8 +52,12 @@ export const SignIn = () => {
     });
   };
 
+  const resetError = () => setError(undefined);
+
   return (
     <AuthForm
+      resetError={resetError}
+      error={error}
       type="Sign In"
       fields={fields}
       validationSchema={validationSchema}

@@ -15,9 +15,15 @@ type Props = {
   fields: TField[];
   validationSchema: ObjectSchema<any>;
   onSubmit: (values: any) => void;
+  resetError?: () => void;
 };
 
-export const Form: FC<Props> = ({ fields, onSubmit, validationSchema }) => {
+export const Form: FC<Props> = ({
+  fields,
+  onSubmit,
+  validationSchema,
+  resetError,
+}) => {
   return (
     fields && (
       <Formik
@@ -47,7 +53,10 @@ export const Form: FC<Props> = ({ fields, onSubmit, validationSchema }) => {
                     : field.label
                 }
                 value={values[field.name]}
-                onChange={handleChange}
+                onChange={(e) => {
+                  resetError?.();
+                  handleChange(e);
+                }}
                 error={
                   Boolean(touched[field.name]) && Boolean(errors[field.name])
                 }

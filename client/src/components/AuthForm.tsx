@@ -1,4 +1,5 @@
-import { Box, Paper, Typography } from '@mui/material';
+import { ApolloError } from '@apollo/client';
+import { Alert, Box, Paper, Typography } from '@mui/material';
 import { FC } from 'react';
 import { ObjectSchema } from 'yup';
 import { Link } from '../styles';
@@ -15,6 +16,8 @@ type Props = {
   fields: TField[];
   validationSchema: ObjectSchema<any>;
   onSubmit: (values: any) => void;
+  error?: ApolloError;
+  resetError?: () => void;
 };
 
 export const AuthForm: FC<Props> = ({
@@ -22,6 +25,8 @@ export const AuthForm: FC<Props> = ({
   validationSchema,
   fields,
   onSubmit,
+  error,
+  resetError,
 }) => {
   return (
     <Paper
@@ -30,8 +35,14 @@ export const AuthForm: FC<Props> = ({
       <Typography variant="h4" component="h2">
         {type}
       </Typography>
+      {error && (
+        <Alert sx={{ margin: '1rem 0' }} variant="filled" severity="error">
+          {error.message}
+        </Alert>
+      )}
       <Box sx={{ padding: '1rem 0 2rem' }}>
         <Form
+          resetError={resetError}
           fields={fields}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
