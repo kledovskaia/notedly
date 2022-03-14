@@ -36,10 +36,6 @@ export const AuthContextProvider: FC = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    if (isLoggedIn) navigate('/');
-  }, [isLoggedIn]);
-
-  useEffect(() => {
     if (token === null) return;
     if (token) localStorage.setItem('notedly-token', token);
     if (!token) {
@@ -55,6 +51,7 @@ export const AuthContextProvider: FC = ({ children }) => {
   };
   const login = (token: string) => {
     setToken(token);
+    navigate('/');
   };
 
   return (

@@ -3,12 +3,13 @@ import { useAppQuery } from '../hooks/useAppQuery';
 import { FeedConainer, NotesContainer } from '../styles';
 import { Note } from '../components/Note';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { NoNotes } from '../components/NoNotes';
 
 type TDataResponse = { noteFeed: TNoteFeed };
 
 export const NoteFeed = () => {
   useDocumentTitle('Home | Notedly');
-  const { data, fetchMore } = useAppQuery<TDataResponse>('GET_NOTES');
+  const { data, fetchMore, loading } = useAppQuery<TDataResponse>('GET_NOTES');
 
   const loadMore = () => {
     fetchMore({
@@ -30,6 +31,7 @@ export const NoteFeed = () => {
 
   return (
     <FeedConainer>
+      {!loading && !data?.noteFeed?.notes?.length && <NoNotes />}
       {data && (
         <>
           <NotesContainer>

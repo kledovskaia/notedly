@@ -1,8 +1,8 @@
-import { createContext, FC, useState } from 'react';
+import { createContext, FC, useEffect, useState } from 'react';
 
 type TLoadingState = { [key in string]: boolean };
 type TLoadingContext = {
-  loadingState: TLoadingState;
+  isLoading: boolean;
   updateLoadingState: (update: TLoadingState) => void;
 };
 
@@ -12,12 +12,18 @@ export const LoadingContext = createContext<TLoadingContext>(
 
 export const LoadingContextProvider: FC = ({ children }) => {
   const [loadingState, setLoadingState] = useState<TLoadingState>({});
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(loadingState);
+    setIsLoading(Object.entries(loadingState).some(([_, value]) => value));
+  }, [loadingState]);
 
   const updateLoadingState = (update: TLoadingState) =>
     setLoadingState((state) => ({ ...state, ...update }));
 
   return (
-    <LoadingContext.Provider value={{ loadingState, updateLoadingState }}>
+    <LoadingContext.Provider value={{ isLoading, updateLoadingState }}>
       {children}
     </LoadingContext.Provider>
   );
