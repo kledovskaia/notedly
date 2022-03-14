@@ -38,7 +38,7 @@ const fields = [
 ];
 
 export const SignUp = () => {
-  useDocumentTitle('Sign Up | Notedly');
+  useDocumentTitle('Sign Up');
   const { login } = useContext(AuthContext);
 
   const [signUp, { error: signUpError }] = useAppMutation<TDataResponse>(

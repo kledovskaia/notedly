@@ -5,7 +5,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { NoNotes } from '../components/NoNotes';
 
 export const Favorites = () => {
-  useDocumentTitle('Favorites | Notedly');
+  useDocumentTitle('Favorites');
   const { data, loading } = useAppQuery<{ me: { favorites: TNote[] } }>(
     'GET_MY_FAVORITE_NOTES'
   );

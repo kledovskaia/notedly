@@ -27,7 +27,7 @@ export const EditNote = () => {
   useDocumentTitle(
     `${data && data.note.content.slice(0, 10)}${
       data && data.note.content.length >= 10 ? '...' : ''
-    } | Notedly`
+    }`
   );
   const navigate = useNavigate();
   const [updateNote] = useAppMutation<TDataResponse>('EDIT_NOTE', {

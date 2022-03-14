@@ -7,7 +7,7 @@ import { NoNotes } from '../components/NoNotes';
 type TDataResponse = { me: { notes: TNote[] } };
 
 export const MyNotes = () => {
-  useDocumentTitle('My Notes | Notedly');
+  useDocumentTitle('My Notes');
   const { data, loading } = useAppQuery<TDataResponse>('GET_MY_NOTES');
   return (
     <NotesContainer>

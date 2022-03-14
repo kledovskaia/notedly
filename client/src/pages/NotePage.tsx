@@ -15,7 +15,7 @@ export const NotePage = () => {
   useDocumentTitle(
     `${data && data.note.content.slice(0, 10)}${
       data && data.note.content.length >= 10 ? '...' : ''
-    } | Notedly`
+    }`
   );
 
   return (

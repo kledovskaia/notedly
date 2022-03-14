@@ -8,7 +8,7 @@ import { NoNotes } from '../components/NoNotes';
 type TDataResponse = { noteFeed: TNoteFeed };
 
 export const NoteFeed = () => {
-  useDocumentTitle('Home | Notedly');
+  useDocumentTitle('Home');
   const { data, fetchMore, loading } = useAppQuery<TDataResponse>('GET_NOTES');
 
   const loadMore = () => {
