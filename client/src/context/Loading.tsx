@@ -15,7 +15,6 @@ export const LoadingContextProvider: FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(loadingState);
     setIsLoading(Object.entries(loadingState).some(([_, value]) => value));
   }, [loadingState]);
 

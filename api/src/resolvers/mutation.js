@@ -73,8 +73,6 @@ const updateNote = async (_, { id, content }, { models, user }) => {
     throw new AuthenticationError('You must be signed in to update a note');
 
   const note = await models.Note.findById(id);
-  console.log('user', user);
-  console.log('note', note);
   if (note && String(note.author) !== user.id) {
     throw new ForbiddenError("You don't have permissions to modify this note");
   }
