@@ -5,7 +5,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import Home from '@mui/icons-material/Home';
 import MyNotes from '@mui/icons-material/Description';
 import Favorites from '@mui/icons-material/Bookmarks';
@@ -23,7 +23,7 @@ const links = [
   { anchor: 'Favorites', src: '/favorites', Icon: Favorites },
 ];
 
-export const Navigation: FC<Props> = ({ open }) => {
+const Navigation: FC<Props> = ({ open }) => {
   const { pathname } = useLocation();
   return (
     <List>
@@ -78,3 +78,5 @@ export const Navigation: FC<Props> = ({ open }) => {
     </List>
   );
 };
+
+export default memo(Navigation);

@@ -62,7 +62,10 @@ export const Form = styled(FForm)`
   }
 `;
 
-export const Link = styled(RLink)``;
+export const Link = styled(RLink)`
+  color: inherit;
+  text-decoration: none;
+`;
 
 export const SignUpLink = styled(Link)`
   padding: 0.5rem;
@@ -73,7 +76,7 @@ export const SignInLink = styled(Link)`
 `;
 
 export const NoteContainer = styled(Card)`
-  a {
+  a > a {
     color: #1976d2;
   }
 `;

@@ -2,7 +2,7 @@ import { useAppQuery } from '../hooks/useAppQuery';
 import { NotesContainer } from '../styles';
 import { Note } from '../components/Note';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { NoNotes } from '../components/NoNotes';
+import NoNotes from '../components/NoNotes';
 
 type TDataResponse = { me: { notes: TNote[] } };
 

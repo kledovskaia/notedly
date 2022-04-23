@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useNavigate } from 'react-router-dom';
 import { GET_MY_NOTES, GET_NOTES } from '../graphql/query';
-import { NoteForm } from '../components/NoteForm';
+import NoteForm from '../components/NoteForm';
 
 const validationSchema = Yup.object().shape({
   content: Yup.string().required('Please enter your Note'),

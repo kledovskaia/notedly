@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import { AuthForm } from '../components/AuthForm';
+import AuthForm from '../components/AuthForm';
 import { AuthContext } from '../context/Auth';
 import { useAppMutation } from '../hooks/useAppMutation';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';

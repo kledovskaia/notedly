@@ -3,7 +3,7 @@ import { useAppQuery } from '../hooks/useAppQuery';
 import { FeedConainer, NotesContainer } from '../styles';
 import { Note } from '../components/Note';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { NoNotes } from '../components/NoNotes';
+import NoNotes from '../components/NoNotes';
 
 type TDataResponse = { noteFeed: TNoteFeed };
 

@@ -1,5 +1,4 @@
 import timean from 'timean';
-import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -10,7 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { FC, useContext } from 'react';
+import { FC, useCallback, useContext } from 'react';
 import { Link, Markdown, NoteContainer } from '../styles';
 import { AuthContext } from '../context/Auth';
 import { useAppMutation } from '../hooks/useAppMutation';
@@ -48,20 +47,20 @@ export const Note: FC<Props> = ({ note }) => {
     },
   });
 
-  const handleToggleFavorite = () => {
+  const handleToggleFavorite = useCallback(() => {
     toggleFavorite({
       variables: {
         id: note.id,
       },
     });
-  };
-  const handleDelete = () => {
+  }, [note]);
+  const handleDelete = useCallback(() => {
     deleteNote({
       variables: {
         id: note.id,
       },
     });
-  };
+  }, [note]);
 
   return (
     <NoteContainer>
@@ -103,9 +102,7 @@ export const Note: FC<Props> = ({ note }) => {
       />
       <Link to={`/note/${note.id}`}>
         <CardContent>
-          <Typography variant="body1" color="text.primary">
-            <Markdown>{note.content}</Markdown>
-          </Typography>
+          <Markdown>{note.content}</Markdown>
         </CardContent>
       </Link>
     </NoteContainer>

@@ -6,7 +6,7 @@ import { useAppQuery } from '../hooks/useAppQuery';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useContext, useMemo } from 'react';
 import { AuthContext } from '../context/Auth';
-import { NoteForm } from '../components/NoteForm';
+import NoteForm from '../components/NoteForm';
 
 const validationSchema = Yup.object().shape({
   content: Yup.string().required('Please enter your Note'),

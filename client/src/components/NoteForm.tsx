@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from '@mui/material';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { ObjectSchema } from 'yup';
 import { Form } from './Form';
 
@@ -17,12 +17,7 @@ type Props = {
   onSubmit: (values: any) => void;
 };
 
-export const NoteForm: FC<Props> = ({
-  title,
-  fields,
-  validationSchema,
-  onSubmit,
-}) => {
+const NoteForm: FC<Props> = ({ title, fields, validationSchema, onSubmit }) => {
   return (
     <Paper sx={{ padding: '2rem 2rem 0', margin: '4rem 0' }}>
       <Typography variant="h4" component="h2">
@@ -38,3 +33,5 @@ export const NoteForm: FC<Props> = ({
     </Paper>
   );
 };
+
+export default memo(NoteForm);
